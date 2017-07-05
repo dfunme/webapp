@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=8, IE=Edge, chorme=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta http-equiv="Cache-Control" content="no-store" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    <title>${i18n('system.name')}</title>
+    <link rel="icon" href="${ctx!}/static/img/ico_16X16.ico" type="image/x-icon" /></link>
+    <!-- layui -->
+    <link rel="stylesheet" type="text/css" href="${ctx!}/static/plugins/layui/css/layui.css" />
+    <!-- FontAwesome 4.7.0 -->
+    <link rel="stylesheet" type="text/css" href="${ctx!}/static/plugins/font-awesome/css/font-awesome.min.css" />
+    <!-- login style -->
+    <link rel="stylesheet" type="text/css" href="${ctx!}/static/css/login.css" />
+  </head>
+  <body>
+    <div class="login-main">
+      <form class="layui-form login-form">
+        <div class="layui-form-item">
+          <h2 class="login-form-heading">${i18n('system.name')}</h2>
+        </div>
+        <div class="layui-form-item form-group">
+          <input type="text" id="username" name="username" class="layui-input" placeholder="${i18n('login.username')}">
+        </div>
+        <div class="layui-form-item form-group">
+          <input type="password" id="password" name="password" class="layui-input" placeholder="${i18n('login.password')}">
+        </div>
+        <div class="layui-form-item">
+          <div class="layui-inline"><input type="checkbox" id="rememberMe" name="rememberMe" value="1"></div>${i18n('remember.me')}
+        </div>
+        <button class="btn-blue fr" type="submit">${i18n('login')}</button>
+        <div class="text-error">
+          ${error!}
+        </div>
+      </form>
+    </div>
+    <footer class="login-foot"><p>${i18n('copyright')}</p></footer>
+    <!-- IE8以及以下版本浏览器支持HTML5元素和媒体查询 -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <!-- layui JS -->
+    <script src="${ctx!}/static/plugins/layui/layui.js" type="text/javascript"></script>
+  </body>
+</html>

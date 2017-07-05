@@ -1,0 +1,220 @@
+<div class="container-fluid">
+  <form action="" id="searchForm" class="">
+    <input id="pageNo" name="pageNumber" type="hidden" value="1"/>
+    <input id="pageSize" name="pageSize" type="hidden" value="5"/>
+    <div class="input-append" id="search">
+      <input type="text" id="name" name="name" value="${user.name!}" class="form-control input-sm" placeholder="单位名称"/>
+      <div class="add-on">
+        <a class="" onclick="javascript:loadInfo();"><i class="fa fa-search"></i></a>
+      </div>
+    </div>
+  </form>
+  <table id="${key!}_table" class="layui-table">
+    <thead></thead>
+    <tbody></tbody>
+  </table>
+  <div id="paginationDiv" class="box-footer clearfix w"></div>
+</div>
+<script type="text/javascript">
+$(document).ready(function(){
+	loadInfo();
+})
+
+function _page(n, s){
+	$("#pageNo").val(n);
+	$("#pageSize").val(s);
+	loadInfo();
+}
+
+function loadInfo(){
+	$.ajax({
+		url : '${ctx!}/${dataUrl!}',
+		data : $("#searchForm").serialize(),
+		type : 'post',
+		success : function(data){
+			$("#pageNo").val(data.pageNumber);
+			$("#pageSize").val(data.pageSize);
+			var key_ = '${key!}';
+			var items = data.list;
+			var theadTr = '';
+			var tbodyTr = '';
+			theadTr += '<tr>';
+			theadTr += '<th style="width:30px">'
+			if('${selecttype!}' == "checkbox"){
+				theadTr += '<input type="checkbox" name="selAll" />';
+			}
+			theadTr += '</th>';
+			theadTr += '<th class="w50">${i18n("common.index")}</th>';
+			<? for(col in columns){ ?>
+				theadTr += '<th>${i18n(key!+".attr."+col)}</th>';
+			<? } ?>
+			theadTr += '</tr>';
+			for(var i in items){
+				tbodyTr += '<tr>';
+				tbodyTr += '<td><input type="${selecttype!}" name="${key!}_id" data-id="'+ items[i].id +'" value="'+items[i].name+'" /></td>';
+				tbodyTr += '<td>'+ (parseInt((data.pageNumber - 1)*data.pageSize) + (parseInt(i)+1)) +'</td>';
+				<? for(col_ in columns){ ?>
+					var o = '${col_}';
+					tbodyTr += '<td>'+ isNull(eval('items[i].' + o)) +'</td>';
+				<? } ?>
+				tbodyTr += '</tr>';
+			}
+			$("#${key!}_table thead").html(theadTr);
+			$("#${key!}_table tbody").html(tbodyTr);
+			pageInit(data);
+		}
+	})
+}
+
+function pageInit(page){
+	var pageNumber = page.pageNumber;   // 当前页
+	var pageSize = page.pageSize;       // 页面行数，设置为“-1”表示不进行分页（分页无效）
+	var totalPage = page.totalPage;     // 总页数
+	var totalRow = page.totalRow;       // 总行数
+	var first = 1;// 首页索引
+	var last = (totalRow - (totalRow % pageSize)) / pageSize + first - 1;// 尾页索引
+	var prev;// 上一页索引
+	var next;// 下一页索引
+	var firstPage;// 是否是第一页
+	var lastPage;// 是否是最后一页
+	var length = 8;// 显示页数
+	var slider = 1;// 前后显示页面长度
+	
+	var pageSizeArray = [5,10,20];
+	var funcName = "_page";
+	
+	var ul = '<div class="pagination fl"><ul>';
+	if (totalRow % pageSize != 0 || last == 0) {
+		last++;
+	}
+
+	if (last < first) {
+		last = first;
+	}
+
+	if (pageNumber <= 1) {
+		pageNumber = first;
+		firstPage = true;
+	}
+
+	if (pageNumber >= last) {
+		pageNumber = last;
+		lastPage = true;
+	}
+
+	if (pageNumber < last - 1) {
+		next = pageNumber + 1;
+	} else {
+		next = last;
+	}
+
+	if (pageNumber > 1) {
+		prev = pageNumber - 1;
+	} else {
+		prev = first;
+	}
+
+	if (pageNumber < first) {// 如果当前页小于首页
+		pageNumber = first;
+	}
+
+	if (pageNumber > last) {// 如果当前页大于尾页
+		pageNumber = last;
+	}
+   
+	if (pageNumber == first) {// 如果是首页 
+		ul += '<li class="disabled"><a href="javascript:">&#171; 上一页</a></li>\n'
+	} else {
+		ul += '<li><a href="javascript:' + funcName + '(' + prev + ','
+				+ pageSize + ');">&#171; 上一页</a></li>\n';
+	}
+
+	var begin = pageNumber - (length / 2);
+
+	if (begin < first) {
+		begin = first;
+	}
+
+	var end = begin + length - 1;
+
+	if (end >= last) {
+		end = last;
+		begin = end - length + 1;
+		if (begin < first) {
+			begin = first;
+		}
+	}
+
+	if (begin > first) {
+		var i = first;
+		while (i < first + slider && i < begin) {
+			ul += '<li><a href="javascript:' + funcName + '(' + i
+					+ ',' + pageSize + ');">' + (i + 1 - first)
+					+ '</a></li>\n';
+			i++;
+		}
+		if (i < begin) {
+			ul += '<li class="disabled"><a href="javascript:">...</a></li>\n';
+		}
+	}
+
+	for (var i = begin; i <= end; i++) {
+		if (i == pageNumber) {
+			ul += '<li class="active"><a href="javascript:">'
+					+ (i + 1 - first) + '</a></li>\n';
+		} else {
+			ul += '<li><a href="javascript:' + funcName + '(' + i
+					+ ',' + pageSize + ');">' + (i + 1 - first)
+					+ '</a></li>\n';
+		}
+	}
+
+	if (last - end > slider) {
+		ul += '<li class="disabled"><a href="javascript:">...</a></li>\n';
+		end = last - slider;
+	}
+
+	for (var i = end + 1; i <= last; i++) {
+		ul += '<li><a href="javascript:' + funcName + '(' + i + ','
+				+ pageSize + ');">' + (i + 1 - first) + '</a></li>\n';
+	}
+
+	if (pageNumber == last) {
+		ul += '<li class="disabled"><a href="javascript:">下一页 &#187;</a></li>\n';
+	} else {
+		ul += '<li><a href="javascript:' + funcName + '(' + next + ','
+				+ pageSize + ');">' + '下一页 &#187;</a></li>\n';
+	}
+	ul += '</ul></div>';
+	
+	var _div = '<div class="currentpage fr">当前第';
+	_div += '<input type="text" class="pageno" value="' + pageNumber
+            + '" onkeypress="var e=window.event||this;var c=e.keyCode||e.which;if(c==13)"'
+    _div += funcName + '(this.value,' + pageSize
+   			 + ');" onclick="this.select();"/> 页 / '; 
+   	_div += '<select style="width:60px; height:29px" onchange="' + funcName + '(' + pageNumber
+            + ',this.value);">';
+    for (var i = 0; i < pageSizeArray.length; i++) {
+        _div += '<option value="' + pageSizeArray[i] + '"'; 
+        if (pageSize==pageSizeArray[i]) {
+            _div += ' selected';
+        }
+        _div += '>' + pageSizeArray[i] + '</option>';
+    }
+	_div += '</select> 条， 共 ' +'<span>'+ totalRow +'</span>'+ ' 条</div>';
+	
+	var _o = '';
+	_o += ul;
+	_o += _div;
+	console.log(_o);
+	$("#paginationDiv").html(_o);
+}
+
+function isNull(str){
+	if(str == null){
+		return "";
+	}else{
+		return str
+	}
+}
+</script>

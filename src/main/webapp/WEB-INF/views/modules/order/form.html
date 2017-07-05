@@ -1,0 +1,44 @@
+<? layout("/layouts/form.html",{"module":"order","operate":operate!}){ ?>
+  <input type="hidden" id="id" name="order.id" value="${order.id!}">
+  <div class="control-group">
+    <label class="span2 control-label required-lable">${i18n("order.attr.contractno")}</label>
+    <div class="span4">
+      <#input type="text" id="contractno" name="order.contract_no" value="${order.contract_no!}" css="input-xlarge required"/>
+    </div>
+    <label class="span2 control-label required-lable">${i18n("office.attr.name")}</label>
+    <div class="span4">
+      <#selecttable key="office" model="order" label="${i18n('office')}" hideValue="${order.office.id!}" showValue="${order.office.name!}" selecttype="radio" dataUrl="office/datalist" css="input-xlarge required" columns="name,address,type"/>
+    </div>
+  </div>
+  <div class="control-group">
+    <label class="span2 control-label required-lable">${i18n("order.attr.begindate")}</label>
+    <div class="span4">
+      <input type="text" id="begindate" name="order.begin_date" value="${order.begin_date!}" onFocus="WdatePicker({maxDate:'#F{$dp.$D(\'enddate\')}'})" class="Wdate input-xlarge required" readonly/>
+    </div>
+    <label class="span2 control-label required-lable">${i18n("order.attr.enddate")}</label>
+    <div class="span4">
+      <input type="text" id="enddate" name="order.end_date" value="${order.end_date!}" onFocus="WdatePicker({minDate:'#F{$dp.$D(\'begindate\')}'})" class="Wdate input-xlarge required" readonly/>
+    </div>
+  </div>
+  <div class="control-group">
+    <label class="span2 control-label">${i18n("order.attr.memo")}</label>
+    <div class="span10">
+      <#input type="textarea" id="memo" name="order.memo" value="${order.memo!}" css="input-xxlarge"/>
+    </div>
+  </div>
+
+  <script type="text/javascript">
+	$(document).ready(function() {
+	    $("#dataform").validate({
+	    	errorClass: "text-error ml10",
+	    	errorPlacement: function(error, element) {  
+	    	    if(element.is(":radio")){
+	    	    	error.appendTo(element.parent().next()); 
+	    	    } else{
+	    	    	error.appendTo(element.parent()); 
+	    	    }
+	    	},
+	    });
+	});
+  </script>
+<? } ?>

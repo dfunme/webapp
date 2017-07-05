@@ -1,0 +1,28 @@
+<div class="control-group">
+  <label class="span1 control-label">${i18n("article.attr.category")}</label>
+  <div class="span3">
+    <input type="text" id="category" name="category" value="${category!}" class=""/>
+  </div>
+  <label class="span1 control-label">${i18n("article.attr.name")}</label>
+  <div class="span3">
+    <input type="text" id="name" name="name" value="${name!}" class=""/>
+  </div>
+  <label class="span1 control-label">${i18n("article.attr.content")}</label>
+  <div class="span3">
+    <input type="text" id="content" name="content" value="${content!}" class=""/>
+  </div>
+</div>
+<div class="control-group">
+  <label class="span1 control-label">${i18n("common.updateDate")}</label>
+  <div class="span3">
+    <div class="control-group">
+      <div class="span5">
+        <#input type="date" id="updateDateFrom" name="updateDateFrom" value="${updateDateFrom!}" css="input-small"/>
+      </div>
+      <div class="span1 tc">${i18n("common.to")}</div>
+      <div class="span5">
+        <#input type="date" id="updateDateTo" name="updateDateTo" value="${updateDateTo!}" css="input-small"/>
+      </div>
+    </div>
+  </div>
+</div>

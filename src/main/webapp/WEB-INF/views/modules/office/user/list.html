@@ -1,0 +1,35 @@
+<? layout("/layouts/sublist.html",{"module":"office","submodule":"user","operate":"user.list","reback":true,"add":true,"key":office.id!,"label":office.name!}){ ?>
+  <table class="table layui-table">
+    <thead>
+      <tr>
+        <th class="w50">${i18n("common.index")}</th>
+        <th>${i18n("user.attr.office")}</th>
+        <th>${i18n("user.attr.name")}</th>
+        <th>${i18n("user.attr.username")}</th>
+        <th>${i18n("role")}</th>
+        <th class="w100">${i18n("operate")}</th>
+      </tr>
+    </thead>
+    <tbody>
+    <? for(item in page.list){ ?>
+      <tr>
+        <td class="tc">${(page.pageNumber-1)*page.pageSize+itemLP.index}</td>
+        <td>${item.office.name!}</td>
+        <td class="tc">${item.name!}</td>
+        <td class="tc">${item.username!}</td>
+        <td class="tc">${item.role.name!}</td>
+        <td class="tc">
+          <? if(shiro.hasPermission('office:edit')){ ?>
+          <a href="${ctx!}/office/user/edit/${item.id!}" title="${i18n('operate.edit')}"><i class="fa fa-edit mr5"></i></a>
+          <a href="javascript:remove(${item.id!},'user',${office.id!});" title="${i18n('operate.delete')}"><i class="fa fa-remove mr5"></i></a>
+          <? } ?>
+        </td>
+      </tr>
+    <? }elsefor{ ?>
+      <tr><td colspan="6">暂无数据</td></tr>
+    <? } ?>
+    </tbody>
+  </table>
+  <!-- <#pagination page="${page}" uri="user" /> -->
+  <div id="page1" class="fr"></div>
+<? } ?>

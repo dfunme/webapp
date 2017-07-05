@@ -1,0 +1,67 @@
+<? layout("/layouts/default.html",{"module":module!,"operate":operate!}){ ?>
+  <div class="mt15 mb10">
+    <span class="layui-breadcrumb">
+	    <a href="${ctx!}/"><i class="fa fa-home"></i>${i18n("home.module")}</a>
+	    <a href="${ctx!}/${module!}">${i18n(module!+".module")}</a>
+	    <a><cite>${label!}${i18n(module!+"."+operate!)}</cite></a>
+	</span>
+  </div>
+  <hr/>
+  
+  
+  <div class="box">
+    <div class="box-header">
+      <form id="searchform" action="${ctx!}/${module!}/${submodule!}" method="post" class="form-horizontal">
+        <input type="hidden" name="pageNumber" value="1">
+        <input type="hidden" name="pageSize" value="${pageSize!10}">
+        <input type="hidden" id="orderBy" name="orderBy" value="${orderBy!}" />
+<? if(search! == "true") { ?>
+        <div class="box-body">
+          <? include("/modules/"+module!+"/"+submodule!+"/search.html"){} ?>
+        </div>
+<? } ?>
+      <div class="layui-clear pb10">
+        <div class="add-btn fl mt5">
+<? if(!isEmpty(submodule!)) { ?>
+          <a  href="${ctx!}/${module!}"><i class="fa fa-reply mr5"></i>${i18n("operate.return")}</a>
+<? } ?>
+<? if(add!false && shiro.hasPermission(module!+':edit')){ ?>
+          <a  href="${ctx!}/${module!}/${submodule!}/add/${key!}"><i class="fa fa-plus mr5"></i>${i18n("operate.add")}</a>
+<? if(export!false) { ?>
+          <#exportfile key="${module}" url="${ctx!}/${module!}/export?flag=true" />
+<? } ?>
+<? if(import!false) { ?>
+          <#uploadfile key="${module}" action="${ctx!}/${module!}/upload" templateUrl="${ctx!}/${module}/export?flag=false" />
+<? } ?>
+<? } ?>
+<? if(search!false) { ?>
+          <button type="button" id="search-btn" class="layui-btn layui-btn-normal fr"><i class="fa fa-search mr5"></i>${i18n("operate.search")}</button>
+<? } ?>
+        </div>
+    </div>
+        
+      </form>
+    </div>
+    <div class="box-body no-padding">
+      ${layoutContent}
+    </div>
+  </div>
+  <script type="text/javascript">
+	function subremove(id,mid){
+		layer.open({
+			title: "提示 ",
+			icon: 3,
+			content: "确定要删除该数据吗？",
+			btn: ["确定","取消"],
+			btn1: function(index){
+				layer.close(index);
+				var url = '${ctx!}/${module!}/${submodule!}/delete/'+id+'-'+mid;
+				window.location = url;
+			},
+			btn2: function(index){
+				layer.close(index);
+			}
+		});
+	}
+  </script>
+<? } ?>

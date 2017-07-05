@@ -1,0 +1,73 @@
+<? layout("/layouts/subform.html",{"module":"project","submodule":"version","operate":operate!}){ ?>
+  <input type="hidden" id="id" name="version.id" value="${version.id!}">
+  <input type="hidden" id="project_id" name="version.project_id" value="${version.project_id!}">
+  <div class="control-group">
+    <label class="span2 control-label required-lable">${i18n("version.attr.name")}</label>
+    <div class="span4">
+      <#input type="text" id="name" name="version.name" value="${version.name!}" css="input-xlarge required"/>
+    </div>
+    <label class="span2 control-label required-lable">${i18n("version.attr.type")}</label>
+    <div class="span4">
+      <#input type="radio" id="type" name="version.type" key="code" value="${version.type!}" list="${dictList('platform_type')}" css="required"/>
+    </div>
+  </div>
+  <div class="control-group">
+    <label class="span2 control-label required-lable">${i18n("version.attr.version")}</label>
+    <div class="span4">
+      <#input type="text" id="version" name="version.version" value="${version.version!}" css="input-xlarge required"/>
+    </div>
+    <label class="span2 control-label required-lable">${i18n("version.attr.status")}</label>
+    <div class="span4">
+      <#input type="radio" id="status" name="version.status" key="code" value="${version.status!}" list="${dictList('version_status')}" css="required"/>
+    </div>
+  </div>
+  <div class="control-group">
+    <label class="span2 control-label required-lable">${i18n("version.attr.url")}</label>
+    <div class="span4">
+      <#input type="text" id="url" name="version.url" value="${version.url!}" css="input-xlarge required"/>
+      <#uploadapp name="${version.name!}" url="${version.url!}" style="required" />
+    </div>
+    <label class="span2 control-label required-lable">${i18n("version.attr.size")}</label>
+    <div class="span4">
+      <#input type="text" id="size" name="version.size" value="${version.size!}" css="input-xlarge required"/>
+    </div>
+  </div>
+  <div class="control-group">
+    <label class="span2 control-label">${i18n("version.attr.logo")}</label>
+    <div class="span4">
+      <#input type="text" id="logo" name="version.logo" value="${version.logo!}" css="input-xlarge"/>
+    </div>
+    <label class="span2 control-label">${i18n("version.attr.thumbnail")}</label>
+    <div class="span4">
+      <#input type="text" id="thumbnail" name="version.thumbnail" value="${version.thumbnail!}" css="input-xlarge"/>
+    </div>
+  </div>
+  <div class="control-group">
+    <label class="span2 control-label">${i18n("common.memo")}</label>
+    <div class="span4">
+      <#input type="text" id="memo" name="version.memo" value="${version.memo!}" css="input-xlarge"/>
+    </div>
+  </div>
+  <script src="${ctx!}/static/plugins/ueditor/ueditor.config.js" charset="utf-8" type="text/javascript"></script>
+  <script src="${ctx!}/static/plugins/ueditor/ueditor.all.js" charset="utf-8" type="text/javascript"></script>
+  <script src="${ctx!}/static/plugins/ueditor/lang/zh-cn/zh-cn.js" type="text/javascript"></script>
+  <script type="text/javascript">
+	 $(document).ready(function() {
+	    $("#dataform").validate({
+	    	errorClass: "text-error ml10",
+	    	errorPlacement: function(error, element) {  
+	    	    if(element.is(":radio")){
+	    	    	error.appendTo(element.parent().next()); 
+	    	    } else{
+	    	    	error.appendTo(element.parent()); 
+	    	    }
+	    	}
+	    });
+		ue = UE.getEditor('upload_ue');
+		ue.ready(function () {
+			ue.setDisabled();
+			ue.hide();
+		});
+	}); 
+  </script>
+<? } ?>

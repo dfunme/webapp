@@ -1,0 +1,49 @@
+<? layout("/layouts/list.html",{"module":"article","operate":"list","add":true,"search":true}){ ?>
+  <table class="table table-bordered table-hover">
+    <thead>
+      <tr>
+        <th class="w50">${i18n("common.index")}</th>
+        <th class="w100">${i18n("article.attr.category")}</th>
+        <th>${i18n("article.attr.name")}</th>
+        <th class="w100">${i18n("article.attr.image")}</th>
+        <th class="w50">${i18n("article.attr.hits")}</th>
+        <th class="w50">${i18n("common.status")}</th>
+        <th class="w150">${i18n("article.attr.update_time")}</th>
+        <th class="w100">${i18n("operate")}</th>
+      </tr>
+    </thead>
+    <tbody>
+    <? for(item in page.list!){ ?>
+      <tr>
+        <td class="tc">${(page.pageNumber-1)*page.pageSize+itemLP.index}</td>
+        <td class="tc">${item.category.name!}</td>
+        <td><a href="${ctx}/article/view/${item.id}" title="${item.name!}">${item.name!}</a></td>
+        <td class="tc"><img src="${ctx!}${isEmpty(item.image!)?'/static/img/placeholder.png':'/file/download?url='+item.image!}" width="87.5px" height="53px"/></td>
+        <td class="tr">${item.hits!}</td>
+        <td class="tc">${dict(item.status!,'article_type','')}</td>
+        <td class="tc">${item.update_date!,dateFormat="yyyy-MM-dd HH:mm:ss"}</td>
+        <td class="tc">
+        <? if(shiro.hasPermission('article:edit')){ ?>
+            <a href="${ctx}/article/edit/${item.id}" title="${i18n('operate.edit')}"><i class="fa fa-edit mr5"></i></a>
+            <a href="javascript:remove(${item.id});" title="${i18n('operate.delete')}"><i class="fa fa-remove mr5"></i></a>
+            <? if(item.status! == 'draft'){ ?>
+            <a href="javascript:status('${item.id}','publish');" title="${dict('publish','article_type','')}"><i class="fa fa-check"></i></a>
+            <? }else if(item.status! == 'publish'){ ?>
+            <a href="javascript:status('${item.id}','draft');" title="${dict('draft','article_type','')}"><i class="fa fa-ban"></i></a>
+            <? } ?>
+        <? } ?>
+        </td>
+      </tr>
+    <? }elsefor{ ?>
+      <tr><td colspan="8">暂无数据</td></tr>
+    <? } ?>
+    </tbody>
+  </table>
+  <#pagination page="${page}"/>
+  <script type="text/javascript">
+	function status(id,status){
+		var url = '${ctx!}/article/status?id='+id+'&status='+status;
+		window.location = url;
+	}
+  </script>
+<? } ?>

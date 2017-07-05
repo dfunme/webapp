@@ -1,0 +1,48 @@
+<? layout("/layouts/list.html",{"module":"log","operate":"list","search":true}){ ?>
+  <table class="layui-table table">
+    <thead>
+      <tr>
+        <th class="w50">${i18n("common.index")}</th>
+        <th>${i18n("log.attr.office")}</th>
+        <th>${i18n("common.createBy")}</th>
+        <th>${i18n("log.attr.requestUri")}</th>
+        <th>${i18n("log.attr.method")}</th>
+        <th>${i18n("log.attr.userip")}</th>
+        <th>${i18n("common.createDate")}</th>
+      </tr>
+    </thead>
+    <tbody>
+    <? for(item in page.list!){ ?>
+      <tr>
+        <td class="tc">${(page.pageNumber-1)*page.pageSize+itemLP.index}</td>
+        <td>${item.office.name!}</td>
+        <td>${item.createBy.name!}</td>
+        <td>${item.request_uri!}</td>
+        <td>${item.method!}</td>
+        <td>${item.user_ip!}</td>
+        <td>${item.create_date!,dateFormat="yyyy-MM-dd HH:mm:ss"}</td>
+      </tr>
+      <tr>
+        <td colspan="7">
+          <table class="table">
+            <tr>
+              <td>${i18n("log.attr.userAgent")}: ${item.user_agent!}</td>
+            </tr>
+            <tr>
+              <td>${i18n("log.attr.params")}: ${item.params!}</td>
+            </tr>
+            <? if(item.exception != null){ ?>
+            <tr>
+              <td>${i18n("log.attr.exception")}: ${item.exception!}</td>
+            </tr>
+            <? } ?>
+          </table>
+        </td>
+      </tr>
+    <? }elsefor{ ?>
+      <tr><td colspan="7">暂无数据</td></tr>
+    <? } ?>
+    </tbody>
+  </table>
+  <#pagination page="${page}"/>
+<? } ?>

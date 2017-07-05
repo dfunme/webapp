@@ -1,0 +1,114 @@
+<form id="dataform" method="post" action="${ctx!}/category/${operate! == 'add'?'save':'update'}" class="form-horizontal">
+  <input type="hidden" name="category.id" value="${category.id!}">
+  <input type="hidden" name="category.site_id" value="${category.site_id!}">
+  <div class="control-group">
+    <label class="span2 control-label required-lable">${i18n("category.attr.site")}</label>
+    <div class="span9 controls">
+      <input type="text" id="siteName" name="siteName" value="${category.site.name!}" class="input-xlarge" readonly="readonly"/>
+    </div>
+  </div>
+  <div class="control-group">
+    <label class="span2 control-label required-lable">${i18n("category.attr.parent")}</label>
+    <div class="span9 controls">
+      <#selecttree model="category" key="parent" label="${i18n('category')}" hideValue="${category.parent.id!}" showValue="${category.parent.name!}" css="input-xlarge required" async="true" url="/cms/category/tree"/>
+    </div>
+  </div>
+  <div class="control-group">
+    <label class="span2 control-label required-lable">${i18n("category.attr.name")}</label>
+    <div class="span9 controls">
+      <#input type="text" id="name" name="category.name" value="${category.name!}" css="input-xlarge required"/>
+    </div>
+  </div>
+  <div class="control-group">
+    <label class="span2 control-label">${i18n("category.attr.icon")}</label>
+    <div class="span9 controls">
+      <#selecticon id="icon" name="category.icon" value="${category.icon!}"/>
+    </div>
+  </div>
+  <div class="control-group">
+    <label class="span2 control-label">${i18n("category.attr.image")}</label>
+    <div class="span9 controls">
+      <#cropper id="image" name="image" value="${strutil.replace(category.image!'','\\','-')}" width="350" height="212"/>
+    </div>
+  </div>
+  <div class="control-group">
+    <label class="span2 control-label">${i18n("category.attr.view_template")}</label>
+    <div class="span9 controls">
+      <#input type="select" id="view_template" name="category.view_template" key="code" value="${category.view_template!}" dictList="article_view" css="form-control input-sm required"/>
+    </div>
+  </div>
+  <div class="control-group">
+    <label class="span2 control-label">${i18n("category.attr.href")}</label>
+    <div class="span9 controls">
+      <#input type="text" id="href" name="category.href" value="${category.href!}" css="input-xlarge"/>
+      <span class="help-inline">栏目超链接地址，优先级“高”</span>
+    </div>
+  </div>
+  <div class="control-group">
+    <label class="span2 control-label">${i18n("category.attr.target")}</label>
+    <div class="span9 controls">
+      <#input type="text" id="target" name="category.target" value="${category.target!}" css="input-xlarge"/>
+      <span class="help-inline">栏目超链接打开的目标窗口，新窗口打开，请填写：“_blank”</span>
+    </div>
+  </div>
+  <div class="control-group">
+    <label class="span2 control-label">${i18n("category.attr.keywords")}</label>
+    <div class="span9 controls">
+      <#input type="text" id="keywords" name="category.keywords" value="${category.keywords!}" css="input-xlarge"/>
+      <span class="help-inline">填写描述及关键字，用空格隔开，有助于搜索引擎优化</span>
+    </div>
+  </div>
+  <div class="control-group">
+    <label class="span2 control-label">${i18n("common.sort")}</label>
+    <div class="span9 controls">
+      <#input type="text" id="sort" name="category.sort" value="${category.sort!}" css="input-xlarge"/>
+      <span class="help-inline">同级栏目的排列次序</span>
+    </div>
+  </div>
+  <style>
+    .bb{height:500px; width:500px;}
+  </style>
+  <div class="control-group">
+    <label class="span2 control-label">${i18n("common.memo")}</label>
+    <div class="span9 controls">
+       <textarea  id="memo" name="category.memo" value="${category.memo!}" class="input-xlarge input-textarea-style"></textarea>
+    </div>
+  </div>
+  <div class="control-group">
+    <label class="span2 control-label">${i18n("category.attr.allowComment")}</label>
+    <div class="span9 controls">
+      <#input type="radio" id="type" name="category.allow_comment" value="${category.allow_comment!}" list="${dictList('boolean')}" css=""/>
+    </div>
+  </div>
+  <div class="control-group">
+    <label class="span2 control-label">${i18n("category.attr.isAudit")}</label>
+    <div class="span9 controls">
+      <#input type="radio" id="type" name="category.is_audit" value="${category.is_audit!}" list="${dictList('boolean')}" css="input-xlarge"/>
+    </div>
+  </div>
+  <? if(operate! == 'view'){ ?>
+  <div class="control-group">
+    <label class="span2 control-label">${i18n("common.sid")}</label>
+    <div class="span9 controls">${category.sid}</div>
+  </div>
+  <? } ?>
+  <? if(operate! == 'add'||operate! == 'edit'){ ?>
+  <div class="clearfix w">
+    <button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-save mr5"></i>${i18n("operate.save")}</button>
+  </div>
+  <? } ?>
+</form>
+<script type="text/javascript">
+	$(document).ready(function() {
+	    $("#dataform").validate({
+	    	errorClass: "text-error ml10",
+	    	errorPlacement: function(error, element) {  
+	    	    if(element.is("#category_name")){
+	    	    	error.appendTo(element.parent().parent()); 
+	    	    } else{
+	    	    	error.appendTo(element.parent()); 
+	    	    }
+	    	},
+	    });
+	});
+</script>

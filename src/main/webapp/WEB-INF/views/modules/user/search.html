@@ -1,0 +1,28 @@
+<div class="layui-form-item">
+  <div class="layui-inline col-4">
+    <label class="layui-form-label">${i18n("user.attr.office")}</label>
+    <div class="layui-input-block">
+      <input type="text" id="office" name="office" value="${office!}" class="layui-input"/>
+    </div>
+  </div>
+  <div class="layui-inline col-4">
+    <label class="layui-form-label">${i18n("user.attr.name")}</label>
+    <div class="layui-input-block">
+      <input type="text" id="name" name="name" value="${name!}" class="layui-input"/>
+    </div>
+  </div>
+  <div class="layui-inline col-4">
+    <label class="layui-form-label">${i18n("user.attr.username")}</label>
+    <div class="layui-input-block">
+      <input type="text" id="username" name="username" value="${username!}" class="layui-input"/>
+    </div>
+  </div>
+</div>
+<div class="layui-form-item">
+  <div class="layui-inline col-4">
+    <label class="layui-form-label">${i18n("role")}</label>
+    <div class="layui-input-block">
+      <#input type="select" id="role_id" name="role_id" key="id" list="${roleList!}" value="${role_id!}" css="layui-input"/>
+    </div>
+  </div>
+</div>

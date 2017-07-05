@@ -1,0 +1,43 @@
+<? layout("/layouts/list.html",{"module":"project","operate":"list","add":true,"search":true}){ ?>
+  <table class="layui-table table">
+    <thead>
+      <tr>
+        <th class="w50">${i18n("common.index")}</th>
+        <th>${i18n("project.attr.name")}</th>
+        <th>${i18n("project.attr.customer")}</th>
+        <th>${i18n("project.attr.logo")}</th>
+        <th>${i18n("project.attr.package")}</th>
+        <th>${i18n("version")}</th>
+        <th class="w150">${i18n("operate")}</th>
+      </tr>
+    </thead>
+    <tbody>
+    <? for(item in page.list!){ ?>
+      <tr>
+        <td class="tc">${(page.pageNumber-1)*page.pageSize+itemLP.index}</td>
+        <td><a href="${ctx!}/project/view/${item.id}" title="${i18n('operate.view')}">${item.name!}</a></td>
+        <td>${item.customer!}</td>
+        <td><img src="${ctx!}/file/download?url=${item.logo!}" alt="暂无图标"/></td>
+        <td>${item.package!}</td>
+        <td>
+        <? for(v in item.versions!){ ?>
+          <div>${v!}</div>
+        <? } ?>
+        </td>
+        <td class="tc">
+        <? if(shiro.hasPermission('project:edit')){ ?>
+          <a href="${ctx!}/project/edit/${item.id!}" title="${i18n('operate.edit')}"><i class="fa fa-edit mr5"></i></a>
+          <a href="javascript:remove(${item.id!});" title="${i18n('operate.delete')}"><i class="fa fa-remove mr5"></i></a>
+		  <a href="${ctx!}/project/version/${item.id!}" title="${i18n('version.list')}"><i class="fa fa-tags mr5"></i></a>
+        <? } ?>
+		  <a href="${ctx!}/install/${item.sid!}-testing" target="_bank" title="${i18n('project.version.testing')}"><i class="fa fa-star-o mr5"></i></a>
+		  <a href="${ctx!}/install/${item.sid!}" target="_bank" title="${i18n('project.version.release')}"><i class="fa fa-star mr5"></i></a>
+        </td>
+      </tr>
+    <? }elsefor{ ?>
+      <tr><td colspan="6">${i18n('common.none')}</td></tr>
+    <? } ?>
+    </tbody>
+  </table>
+  <#pagination page="${page}"/>
+<? } ?>

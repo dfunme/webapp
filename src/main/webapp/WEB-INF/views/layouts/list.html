@@ -1,0 +1,63 @@
+<? layout("/layouts/default.html",{"module":module!,"operate":operate!}){ ?>
+<div class="mt15 mb10">
+  <span class="layui-breadcrumb">
+     <a href="${ctx!}/"><i class="fa fa-home"></i>${i18n("home.module")}</a>
+     <a href="${ctx!}/${module!}">${i18n(module!+".module")}</a>
+     <a><cite>${i18n(module!+"."+operate!)}</cite></a>
+  </span>
+</div>
+<hr/>
+  <form id="searchform" action="${ctx!}/${module!}" method="post" class="layui-form mt20">
+    <input type="hidden" name="pageNumber" value="1">
+    <input type="hidden" name="pageSize" value="${pageSize!10}">
+    <input type="hidden" id="orderBy" name="orderBy" value="${orderBy!}" />
+<? if(search!false) { ?>
+    <? include("/modules/"+module!+"/search.html"){} ?>
+<? } ?>
+  </form>
+  <div class="mb20 oh mt10">
+<? if(add!false && shiro.hasPermission(module!+':edit')){ ?>
+    <div class="add-btn fl mt5">
+      <a href="${ctx!}/${module!}/add"><i class="fa fa-plus mr5"></i>${i18n("operate.add")}</a>
+<? if(export!false){ ?>
+      <#exportfile key="${module}" url="${ctx!}/${module!}/export?flag=true"/>
+<? } ?>
+<? if(import!false){ ?>
+      <#import url="${ctx!}/${module!}/upload"/>
+<? } ?>
+<? if(module! == 'patent'){ ?>
+      <a href="javascript:syncPatent()"><i class="fa fa-refresh mr5"></i>${i18n("operate.refresh")}</a>
+<? } ?>
+    </div>
+<? } ?>
+<? if(search!false){ ?>
+    <div class="button fr">
+      <button type="button" id="search-btn"><i class="fa fa-search mr5"></i>${i18n("operate.search")}</button>
+    </div>
+<? } ?>
+  </div>
+  ${layoutContent}
+  <script type="text/javascript">
+	<? if (search!false) { ?>
+	$("#search-btn").click(function(){
+		$("#searchform").submit();
+	});
+	<? } ?>
+	function remove(id){
+		layer.open({
+			title: "提示 ",
+			icon: 3,
+			content: "确定要删除该数据吗？",
+			btn: ["确定","取消"],
+			btn1: function(index){
+				layer.close(index);
+				var url = '${ctx!}/${module!}/delete/'+id;
+				window.location = url;
+			},
+			btn2: function(index){
+				layer.close(index);
+			}
+		});
+	}
+  </script>
+<? } ?>

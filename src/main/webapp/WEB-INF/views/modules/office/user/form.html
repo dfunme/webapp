@@ -1,0 +1,88 @@
+<? layout("/layouts/subform.html",{"module":"office","submodule":"user","operate":operate!}){ ?>
+  <input type="hidden" id="id" name="user.id" value="${user.id!}">
+  <input type="hidden" id="office_id" name="user.office_id" value="${user.office_id!}">
+<form class="layui-form"> 
+  <div class="layui-form-item">
+	  <div class="layui-inline col-5">
+	    <label class="layui-form-label">${i18n("user.attr.name")}</label>
+	    <div class="layui-input-block">
+	      <#input type="text" id="name" name="user.name" value="${user.name!}" css="layui-input"/>
+	    </div>
+	  </div>
+	  <div class="layui-inline col-5">
+	    <label class="layui-form-label">${i18n("user.attr.office")}</label>
+	    <div class="layui-input-block">
+	      <input type="text" id="officeName" name="officeName" value="${office.name!}" readonly="readonly" class="layui-input"/>
+	    </div>
+	  </div>
+  </div>
+  <div class="layui-form-item">
+	  <div class="layui-inline col-5">
+	    <label class="layui-form-label">${i18n("user.attr.username")}</label>
+	    <div class="layui-input-block">
+	      <#input type="text" id="username" name="user.username" value="${user.username!}" css="layui-input"/>
+	    </div>
+	  </div>
+	  <div class="layui-inline col-5">
+	    <label class="layui-form-label">${i18n("user.attr.email")}</label>
+	    <div class="layui-input-block">
+	      <#input type="text" id="email" name="user.email" value="${user.email!}" css="layui-input"/>
+	    </div>
+	  </div>
+  </div>
+  <div class="layui-form-item">
+	 <div class="layui-inline">
+	    <label class="layui-form-label">${i18n("role")}</label>
+	    <div class="layui-input-block">
+	    <? for(item in roleList!){ ?>
+	      <label class="radio pr10">
+	        <input type="radio" name="user.role_id" value="${item.id!}"  ${item.id! == user.role_id!?'checked':''}>${item.name!}
+	      </label>
+	    <? } ?>
+	    </div>
+     </div>
+  </div>
+  <div class="layui-form-item">
+     <div class="layui-inline col-5">
+	    <label class="layui-form-label">${i18n("user.attr.password")}</label>
+	    <div class="layui-input-block">
+	      <#input type="text" id="password" name="user.password" css="layui-input"/>
+	    </div>
+	 </div>
+     <div class="layui-inline col-5">
+	    <label class="layui-form-label">${i18n("user.attr.repeat")}</label>
+	    <div class="layui-input-block">
+	      <#input type="text" id="repeat" name="repeat" equalTo="#password" css="layui-input"/>
+	    </div>
+	 </div>
+  </div>
+  <div class="layui-form-item">
+     <div class="layui-inline col-5">
+	    <label class="layui-form-label">${i18n("user.attr.phone")}</label>
+	    <div class="layui-input-block">
+	      <#input type="text" id="phone" name="user.phone" value="${user.phone!}" css="layui-input"/>
+	    </div>
+	 </div>
+	 <div class="layui-inline col-5">
+	    <label class="layui-form-label">${i18n("user.attr.mobile")}</label>
+	    <div class="layui-input-block">
+	      <#input type="text" id="mobile" name="user.mobile" value="${user.mobile!}" css="layui-input"/>
+	    </div>
+	  </div>
+  </div>
+</form>
+  <script type="text/javascript">
+	$(document).ready(function() {
+	    $("#dataform").validate({
+	    	errorClass: "text-error ml10",
+	    	errorPlacement: function(error, element) {  
+	    	    if(element.is(":radio")){
+	    	    	error.appendTo(element.parent().next()); 
+	    	    } else{
+	    	    	error.appendTo(element.parent()); 
+	    	    }
+	    	},
+	    });
+	});
+  </script>
+<? } ?>

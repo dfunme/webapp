@@ -1,0 +1,67 @@
+<? layout("/layouts/list.html",{"module":"patent","operate":"list","add":true}){ ?>
+  <div class="patent-list fl w mt30">
+    <ul>
+      <li class="fl w">
+        <p class="w30 tc fl pl10">序号</p>
+        <p class="w50 tc fl"><input type="checkbox"></p>
+        <p class="w30 tc fl">全选</p>
+      </li>
+      <? for(item in page.list!){ ?>
+      <li class="fl w patent-list-li">
+        <div class="patent-list-title">
+	      <p class="w30 tc fl pl10">${(page.pageNumber-1)*page.pageSize+itemLP.index}</p>
+	      <p class="w50 tc fl"><input type="checkbox"></p>
+	      <p class="fl"><a href="">${item.name!}<span class="cGreen ml15">${item.legal_status!}</span></a></p>
+        </div>
+        <div class="patent-list-more layui-clear">
+          <div class="col-2"><a href=""><img src="${ctx!}/static/img/conter-bg.jpg" alt=""></a></div>
+          <div class="col-10">
+            <ul class="w">
+             <li>
+               <p class="layui-inline col-4"><span class="c9">申请号：</span>${item.application_no!}</p>
+               <p class="layui-inline col-4"><span class="c9">申请日：</span>${item.application_date!}</p>
+               <p class="layui-inline col-4"><span class="c9">专利类型：</span>${item.type!}</p>
+             </li>
+             <li>
+               <p class="layui-inline col-4"><span class="c9">公开号：</span>${item.publication_no!}</p>
+               <p class="layui-inline col-4"><span class="c9">公开日：</span>${item.publication_date!}</p>
+               <p class="layui-inline col-4"><span class="c9">国际主分类号: </span>${item.main_category!}</p>
+             </li>
+             <li>
+               <p class="layui-inline col-12"><span class="c9">申请人：</span>${item.patentee!}</p>
+             </li>
+             <li class="mr10">
+                <p>${item.summary!}</p>                
+             </li>
+            </ul>
+          </div>
+        </div>
+      </li>
+      <? } ?>
+    </ul>
+  </div>
+  <div id="page1" class="fr"></div>
+  <script type="text/javascript">
+	function syncPatent(){
+		layer.open({
+			title: "提示 ",
+			icon: 3,
+			content: "确定要同步专利数据吗？",
+			btn: ["确定","取消"],
+			btn1: function(index){
+				layer.close(index);
+				$.ajax({
+					url : '${ctx!}/patent/sync',
+					type : 'post',
+		    		success : function(data){
+		    			layer.tips("同步完成");
+		    		}
+				});
+			},
+			btn2: function(index){
+				layer.close(index);
+			}
+		});
+	}
+  </script>
+<? } ?>

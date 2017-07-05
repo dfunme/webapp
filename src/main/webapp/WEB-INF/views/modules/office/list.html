@@ -1,0 +1,37 @@
+<? layout("/layouts/list.html",{"module":"office","operate":"list","add":true,"search":true}){ ?>
+  <table class="layui-table">
+    <thead>
+      <tr>
+        <th class="w30">${i18n("common.index")}</th>
+        <th>${i18n("office.attr.name")}</th>
+        <th>${i18n("office.attr.area")}</th>
+        <th>${i18n("office.attr.contact")}</th>
+        <th>${i18n("office.attr.phone")}</th>
+        <th>${i18n("common.sid")}</th>
+        <th class="w100">${i18n("operate")}</th>
+      </tr>
+    </thead>
+    <tbody>
+    <? for(item in page.list!){ ?>
+      <tr>
+        <td class="tc">${(page.pageNumber-1)*page.pageSize+itemLP.index}</td>
+        <td><a href="${ctx!}/office/view/${item.id}" title="${i18n('operate.view')}">${item.name!}</a></td>
+        <td class="tc">${item.area.fullName!}</td>
+        <td class="tc">${item.contact!}</td>
+        <td class="tc">${item.phone!}</td>
+        <td class="tc">${item.sid!}</td>
+        <td class="tc">
+          <? if(shiro.hasPermission('office:edit')){ ?>
+          <a href="${ctx!}/office/edit/${item.id}" title="${i18n('operate.edit')}"><i class="fa fa-edit mr5"></i></a>
+          <a href="javascript:remove(${item.id});" title="${i18n('operate.delete')}"><i class="fa fa-remove mr5"></i></a>
+          <? } ?>
+          <a href="${ctx!}/office/user/${item.id}" title="${i18n('user.list')}"><i class="fa fa-user"></i></a>
+        </td>
+      </tr>
+    <? }elsefor{ ?>
+      <tr><td colspan="7">${i18n('common.none')}</td></tr>
+    <? } ?>
+    </tbody>
+  </table>
+  <#pagination page="${page}"/>
+<? } ?>

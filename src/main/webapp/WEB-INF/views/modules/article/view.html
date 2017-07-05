@@ -1,0 +1,46 @@
+<? layout("/layouts/default.html",{"module":"article","operate":operate!}){ ?>
+  <ul class="breadcrumb roll-nav roll-right">
+    <li><a href="${ctx!}/"><i class="fa fa-home"></i>${i18n("home.module")}</a></li>
+    <li><a href="${ctx!}/${module!}">${i18n("article.module")}</a></li>
+    <li class="active">${i18n("article."+operate!)}</li>
+  </ul>
+  <div class="box">
+    <div class="box-header">
+      <div class="btn-group">
+        <a class="btn btn-sm btn-default" href="javascript:history.go(-1);"><i class="fa fa-reply mr5"></i>${i18n("operate.return")}</a>
+      </div>
+    </div>
+    <div class="box-body row-fluid">
+      <div class="control-group">
+        <div class="span12 tc">
+          <h4>${article.name!}</h4>
+        </div>
+      </div>
+      <div class="control-group">
+        <div class="span4 offset2 tc">
+          ${article.category.site.name!}
+        </div>
+        <div class="span4 tc">
+          ${article.update_date!,'yyyy-mm-dd'}
+        </div>        
+      </div>
+      <div class="control-group">
+        <div class="span12">
+          ${article.content!}
+        </div>
+        <div class="span12">
+          ${i18n("article.attr.image")}
+        </div>
+        <div class="span12">
+          <img src="${ctx!}${isEmpty(article.image!)?'/static/img/placeholder.png':'/file/download?url='+article.image!}" width="350px" height="212px"/>
+        </div>
+        <div class="span12">
+          ${i18n("article.attr.file")}
+        </div>
+        <div class="span12">
+          <a href="${ctx!}${"/file/download?url="+article.file!}">${article.name!}</a>
+        </div>
+      </div>
+    </div>
+  </div>
+<? } ?>

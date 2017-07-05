@@ -1,0 +1,282 @@
+<? layout("/layouts/default.html",{"module":"home","operate":"module"}){ ?>
+ <fieldset class="layui-elem-field">
+  <legend>搜索条件</legend>
+  <div class="layui-field-box">
+      <form class="layui-form">
+		<div class="layui-form-item">
+		  <div class="layui-inline col-4">
+		    <label class="layui-form-label">${i18n("office.attr.name")}</label>
+		    <div class="layui-input-block">
+		      <input type="text" id="name" name="name" value="${name!}" class="layui-input"/>
+		    </div>
+		  </div>
+		  <div class="layui-inline col-4">
+		    <label class="layui-form-label">${i18n("office.attr.area")}</label>
+		    <div class="layui-input-block">
+		      <input type="text" id="area" name="area" value="${area!}" class="layui-input"/>
+		    </div>
+		  </div>
+		  <div class="layui-inline col-4">
+		    <label class="layui-form-label">${i18n("office.attr.contact")}</label>
+		    <div class="layui-input-block">
+		      <input type="text" id="contact" name="contact" value="${contact!}" class="layui-input"/>
+		    </div>
+		  </div>
+		</div>
+      </form>
+
+  </div>
+</fieldset>
+ 
+ <div class="layui-clear w oh mt30">
+    <ul class="info-card-ul">
+      <li class="info-card col-2 oh p10 h200">
+         <div class="info-card-del"><i class="fa fa-remove"></i></div>
+         <div class="layui-clear w">
+            <div class="col-5"><a href=""><img src=""  class="mb10"></a></div>
+            <div class="col-6"><p class="layui-elip">姓名：李小龙</p><p class="layui-elip">性别：男</p></div>
+         </div>
+         <p class="layui-elip"><a href="">单位：科技有限公司单位科技有限公司单位科技有限公司</a></p>
+         <p class="layui-elip"><a href="">简介：科技有限公司</a></p>
+         <p class="layui-elip"><a href="">单位：科技有限公司</a></p>
+      </li>
+      
+      <li class="info-card col-2 oh p10 h200">
+         <div class="info-card-del"><i class="fa fa-remove"></i></div>
+         <div class="layui-clear w">
+            <div class="col-5"><a href=""><img src=""  class="mb10"></a></div>
+            <div class="col-6"><p class="layui-elip">姓名：小二</p><p class="layui-elip">性别：男</p></div>
+         </div>
+         <p class="layui-elip"><a href="">单位：科技有限公司单位科技有限公司单位科技有限公司</a></p>
+         <p class="layui-elip"><a href="">简介：科技有限公司</a></p>
+         <p class="layui-elip"><a href="">单位：科技有限公司</a></p>
+      </li>
+      
+      <li class="info-card col-2 oh p10 h200">
+         <div class="info-card-del"><i class="fa fa-remove"></i></div>
+         <div class="layui-clear w">
+            <div class="col-5"><a href=""><img src=""  class="mb10"></a></div>
+            <div class="col-6"><p class="layui-elip">姓名：小龙</p><p class="layui-elip">性别：男</p></div>
+         </div>
+         <p class="layui-elip"><a href="">单位：科技有限公司单位科技有限公司单位科技有限公司</a></p>
+         <p class="layui-elip"><a href="">简介：科技有限公司</a></p>
+         <p class="layui-elip"><a href="">单位：科技有限公司</a></p>
+      </li>
+      
+      <li class="info-card col-2 oh p10 h200">
+         <div class="info-card-del"><i class="fa fa-remove"></i></div>
+         <div class="layui-clear w">
+            <div class="col-5"><a href=""><img src=""  class="mb10"></a></div>
+            <div class="col-6"><p class="layui-elip">姓名：李小</p><p class="layui-elip">性别：男</p></div>
+         </div>
+         <p class="layui-elip"><a href="">单位：科技有限公司单位科技有限公司单位科技有限公司</a></p>
+         <p class="layui-elip"><a href="">简介：科技有限公司</a></p>
+         <p class="layui-elip"><a href="">单位：科技有限公司</a></p>
+      </li>
+      
+      <li class="info-card col-2 oh p10 h200">
+         <div class="info-card-del"><i class="fa fa-remove"></i></div>
+         <div class="layui-clear w">
+            <div class="col-5"><a href=""><img src=""  class="mb10"></a></div>
+            <div class="col-6"><p class="layui-elip">姓名：李龙</p><p class="layui-elip">性别：男</p></div>
+         </div>
+         <p class="layui-elip"><a href="">单位：科技有限公司单位科技有限公司单位科技有限公司</a></p>
+         <p class="layui-elip"><a href="">简介：科技有限公司</a></p>
+         <p class="layui-elip"><a href="">单位：科技有限公司</a></p>
+      </li>
+    </ul>
+ </div>
+ 
+ 
+<div class="patent-list fl w mt30">
+    <ul>
+       <li class="fl w">
+         <p class="w30 tc fl pl10">序号</p>
+         <p class="w50 tc fl"><input type="checkbox"></p>
+         <p class="w30 tc fl">全选</p>
+       </li>
+       <li class="fl w patent-list-li">
+         <div class="patent-list-title">
+	         <p class="w30 tc fl pl10">1</p>
+	         <p class="w50 tc fl"><input type="checkbox"></p>
+	         <p class="fl"><a href="">低等待时间基线漂移补偿系统和方法<span class="cGreen ml15">有效</span></a></p>
+         </div>
+         <div class="patent-list-more layui-clear">
+            <div class="col-2"><a href=""><img src="${ctx!}/static/img/conter-bg.jpg" alt=""></a></div>
+            <div class="col-10">
+                <ul class="w">
+                  <li>
+                     <p class="layui-inline col-4"><span class="c9">公开号：</span>CN101047676B</p>
+                     <p class="layui-inline col-4"><span class="c9">公开日：</span>2015.02.11</p>
+                     <p class="layui-inline col-4"><span class="c9">国际主分类号: </span><a href="">H04L25/03</a></p>
+                  </li>
+                  <li>
+                     <p class="layui-inline col-4"><span class="c9">申请号：</span>CN200710100616.6</p>
+                     <p class="layui-inline col-4"><span class="c9">申请日：</span>2007.02.25</p>
+                     <p class="layui-inline col-4"><span class="c9">申请人：</span><a href="">马维尔国际贸易有限公司</a></p>
+                  </li>
+                  <li>
+                     <p class="layui-inline col-4"><span class="c9">专利类型：</span>发明授权</p>
+                     <p class="layui-inline col-4"><span class="c9">最新法律状态：</span>授权</p>
+                     <p class="layui-inline col-4"><span class="c9">法律状态更新时间：</span>2015.02.11</p>
+                  </li>
+                  <li class="mr10">
+                     <p>本发明公开了用于检测信号以提供经检测的数据序列的系统和方法，其包括：提供多个候选数据序列；计算与所述候选数据序列中各个数据序列相关联的基线漂移估计；将信号与所述候选数据序列中的各个数据序列中的每一个进行比较，其中通过所述基线漂移估计中的相应估计来补偿所述比较；以及基于所述比较来选择所述多个候选数据序列之一作为经检测的数据序列。</p>                
+                  </li>
+                </ul>
+            </div>
+         </div>
+       </li>
+       <li class="fl w patent-list-li">
+         <div class="patent-list-title">
+	         <p class="w30 tc fl pl10">2</p>
+	         <p class="w50 tc fl"><input type="checkbox"></p>
+	         <p class="fl"><a href="">低等待时间基线漂移补偿系统和方法<span class="cGreen ml15">有效</span></a></p>
+         </div>
+         <div class="patent-list-more layui-clear">
+            <div class="col-2"><a href=""><img src="${ctx!}/static/img/conter-bg.jpg" alt=""></a></div>
+            <div class="col-10">
+                <ul class="w">
+                  <li>
+                     <p class="layui-inline col-4"><span class="c9">公开号：</span>CN101047676B</p>
+                     <p class="layui-inline col-4"><span class="c9">公开日：</span>2015.02.11</p>
+                     <p class="layui-inline col-4"><span class="c9">国际主分类号: </span><a href="">H04L25/03</a></p>
+                  </li>
+                  <li>
+                     <p class="layui-inline col-4"><span class="c9">申请号：</span>CN200710100616.6</p>
+                     <p class="layui-inline col-4"><span class="c9">申请日：</span>2007.02.25</p>
+                     <p class="layui-inline col-4"><span class="c9">申请人：</span><a href="">马维尔国际贸易有限公司</a></p>
+                  </li>
+                  <li>
+                     <p class="layui-inline col-4"><span class="c9">专利类型：</span>发明授权</p>
+                     <p class="layui-inline col-4"><span class="c9">最新法律状态：</span>授权</p>
+                     <p class="layui-inline col-4"><span class="c9">法律状态更新时间：</span>2015.02.11</p>
+                  </li>
+                  <li class="mr10">
+                     <p>本发明公开了用于检测信号以提供经检测的数据序列的系统和方法，其包括：提供多个候选数据序列；计算与所述候选数据序列中各个数据序列相关联的基线漂移估计；将信号与所述候选数据序列中的各个数据序列中的每一个进行比较，其中通过所述基线漂移估计中的相应估计来补偿所述比较；以及基于所述比较来选择所述多个候选数据序列之一作为经检测的数据序列。</p>                
+                  </li>
+                </ul>
+            </div>
+         </div>
+       </li>
+    </ul>
+</div>
+
+<div class="layui-clear"></div>
+<div class="time-form mt20">
+   <div class="layui-form-item">
+      <p class="fl mr10">按</p>
+      <div class="fl mr10">
+	      <select class="layui-input">
+	        <option value="月" selected="">月</option>
+	        <option value="周">周</option>
+	        <option value="年">年</option>
+	      </select>
+      </div>
+      <p class="fl mr30">汇总</p>
+      <div class="layui-input-inline"  style="width: 100px;">
+        <#input type="date" id="createDateFrom" name="createDateFrom" value="${createDateFrom!}" onclick="layui.laydate({elem: this})" css="layui-input"/>
+      </div>
+      <p  class="fl mr10 ml10">${i18n("common.to")}</p>
+      <div class="layui-input-inline" style="width: 100px;">
+        <#input type="date" id="createDateTo" name="createDateTo" value="${createDateTo!}" onclick="layui.laydate({elem: this})" css="layui-input"/>
+      </div>   
+  </div>
+</div>
+
+<div class="time-box w mt15 pr">
+    <ul class="time-box-ul pa w">
+       <li class="w pr pt20 layui-clear">
+          <div class="layui-inline time-box-day pa col-2"><i class="fl mr10"></i><p class="layui-inline">2016.10.10</p></div>
+          <ul class="layui-inline time-box-more col-10">
+            <li>
+               <p class="ww60 layui-elip">低等待时间基线漂移补偿系统和方法低等待时间基线漂移补偿系统和方法低等待时间基线漂移补偿系统和方法低等待时间基线漂移补偿系统和方法</p>
+               <p class="ww10 layui-elip ml20">补充资料</p>
+               <p class="ww10 layui-elip ml20">2016.10.20</p>
+               <p class="ww10 layui-elip ml20">已完成</p>
+            </li>
+            <li class="cr">
+               <p class="ww60 layui-elip">低等待时间基线漂移补偿系统和方法低等待时间基线漂移补偿系统和方法低等待时间基线漂移补偿系统和方法低等待时间基线漂移补偿系统和方法</p>
+               <p class="ww10 layui-elip ml20">过期滞纳</p>
+               <p class="ww10 layui-elip ml20">2016.10.20</p>
+               <p class="ww10 layui-elip ml20">过期滞纳</p>
+            </li>
+          </ul>
+       </li>
+       
+        <li class="w pr pt20 layui-clear">
+          <div class="layui-inline time-box-day pa col-2"><i class="fl mr10"></i><p class="layui-inline">2016.10.10</p></div>
+          <ul class="layui-inline time-box-more col-10">
+            <li>
+               <p class="ww60 layui-elip">低等待时间基线漂移补偿系统和方法低等待时间基线漂移补偿系统和方法低等待时间基线漂移补偿系统和方法低等待时间基线漂移补偿系统和方法</p>
+               <p class="ww10 layui-elip ml20">补充资料</p>
+               <p class="ww10 layui-elip ml20">2016.10.20</p>
+               <p class="ww10 layui-elip ml20">已完成</p>
+            </li>
+            <li>
+               <p class="ww60 layui-elip">低等待时间基线漂移补偿系统和方法低等待时间基线漂移补偿系统和方法低等待时间基线漂移补偿系统和方法低等待时间基线漂移补偿系统和方法</p>
+               <p class="ww10 layui-elip ml20">补充资料</p>
+               <p class="ww10 layui-elip ml20">2016.10.20</p>
+               <p class="ww10 layui-elip ml20">已完成</p>
+            </li>
+          </ul>
+       </li>
+       
+       <li class="w pr pt20 layui-clear">
+          <div class="layui-inline time-box-day pa col-2"><i class="fl mr10"></i><p class="layui-inline">2016.10.10</p></div>
+          <ul class="layui-inline time-box-more col-10">
+            <li>
+               <p class="ww60 layui-elip">低等待时间基线漂移补偿系统和方法低等待时间基线漂移补偿系统和方法低等待时间基线漂移补偿系统和方法低等待时间基线漂移补偿系统和方法</p>
+               <p class="ww10 layui-elip ml20">补充资料</p>
+               <p class="ww10 layui-elip ml20">2016.10.20</p>
+               <p class="ww10 layui-elip ml20">已完成</p>
+            </li>
+            <li>
+               <p class="ww60 layui-elip">低等待时间基线漂移补偿系统和方法低等待时间基线漂移补偿系统和方法低等待时间基线漂移补偿系统和方法低等待时间基线漂移补偿系统和方法</p>
+               <p class="ww10 layui-elip ml20">补充资料</p>
+               <p class="ww10 layui-elip ml20">2016.10.20</p>
+               <p class="ww10 layui-elip ml20">已完成</p>
+            </li>
+          </ul>
+       </li>
+       
+       <li class="w pr pt20 layui-clear">
+          <div class="layui-inline time-box-day pa col-2"><i class="fl mr10"></i><p class="layui-inline">2016.10.10</p></div>
+          <ul class="layui-inline time-box-more col-10">
+            <li>
+               <p class="ww60 layui-elip">低等待时间基线漂移补偿系统和方法低等待时间基线漂移补偿系统和方法低等待时间基线漂移补偿系统和方法低等待时间基线漂移补偿系统和方法</p>
+               <p class="ww10 layui-elip ml20">补充资料</p>
+               <p class="ww10 layui-elip ml20">2016.10.20</p>
+               <p class="ww10 layui-elip ml20">已完成</p>
+            </li>
+            <li>
+               <p class="ww60 layui-elip">低等待时间基线漂移补偿系统和方法低等待时间基线漂移补偿系统和方法低等待时间基线漂移补偿系统和方法低等待时间基线漂移补偿系统和方法</p>
+               <p class="ww10 layui-elip ml20">补充资料</p>
+               <p class="ww10 layui-elip ml20">2016.10.20</p>
+               <p class="ww10 layui-elip ml20">已完成</p>
+            </li>
+          </ul>
+       </li>
+    </ul>
+</div>
+
+
+
+
+
+
+
+
+<div id="page1" class="fr"></div>
+  
+  
+  
+  <!-- 五个方块删除事件 -->
+  <script>
+     $(".info-card .info-card-del").click(function(){
+    	 $(this).parent().remove();
+     })
+  
+  </script>
+
+<? } ?> 

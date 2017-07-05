@@ -1,0 +1,25 @@
+<? layout("/layouts/default.html",{"module":module!,"operate":operate!,"navigation":navigation!}){ ?>
+ <div class="mt15 mb10">
+    <span class="layui-breadcrumb">
+	    <a href="${ctx!}/"><i class="fa fa-home"></i>${i18n("home.module")}</a>
+	    <a href="${ctx!}/${module!}">${i18n(module!+".module")}</a>
+	    <a><cite>${i18n(module!+"."+operate!)}</cite></a>
+	</span>
+  </div>
+  <hr/>
+  
+  
+  <div class="row-fluid">
+    <div class="span3">
+      <div class="well sidebar-nav">
+        <ul class="nav nav-list">
+          <li class="nav-header">${i18n(navigation!)}</li>
+          <ul id="${navigation!}_tree" class="ztree"></ul>
+        </ul>
+      </div>
+    </div>
+    <div id="rightform" class="span9 well">
+    </div>
+  </div>
+  ${layoutContent}
+<? } ?>

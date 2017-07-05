@@ -1,0 +1,24 @@
+<? layout("/layouts/default.html",{"module":module!,"operate":operate!}){ ?>
+  <div class="mt15 mb10">
+    <span class="layui-breadcrumb">
+	    <a href="${ctx!}/"><i class="fa fa-home"></i>${i18n("home.module")}</a>
+	    <a href="${ctx!}/${module!}">${i18n(module!+".module")}</a>
+	    <a><cite>${i18n(module!+"."+operate!)}</cite></a>
+	</span>
+  </div>
+  <hr/>
+  <form id="dataform" method="post" action="${ctx!}/${module!}/${operate! == 'add'?'save':'update'}" class="layui-form">
+    <div class="layui-clear pb20">
+      <div class="add-btn fl mt5">
+        <a href="javascript:history.go(-1);"><i class="fa fa-reply mr5"></i>${i18n("operate.return")}</a>
+      </div>
+    </div>
+    ${layoutContent}
+    <? if(operate! == 'add'||operate! == 'edit'){ ?>
+    <div class="tc mt20">
+      <button type="submit" class="layui-btn layui-btn-normal"><i class="fa fa-save mr5"></i>${i18n("operate.save")}</button>
+    </div>
+    <? } ?>
+  </form>
+
+<? } ?>

@@ -1,0 +1,109 @@
+<? layout("/layouts/form.html",{"module":"article","operate":operate!}){ ?>
+  <input type="hidden" name="article.id" value="${article.id!}">
+  <input type="hidden" name="article.status" value="draft">
+  <div class="control-group form-inline">
+    <label class="span2 control-label required-lable">${i18n("article.attr.category")}</label>
+    <div class="span10">
+      <#selecttree model="article" key="category" label="${i18n('category')}" hideValue="${article.category.id!}" showValue="${article.category.name!}" css="input-xlarge required" url="/category/tree"/>
+    </div>
+  </div>
+  <div class="control-group">
+    <label class="span2 control-label required-lable">${i18n("article.attr.name")}</label>
+    <div class="span10">
+      <#input type="text" id="name" name="article.name" value="${article.name!}" css="input-xxlarge required"/>
+    </div>
+  </div><!-- 
+  <div class="control-group">
+    <label class="span2 control-label">${i18n("article.attr.keywords")}</label>
+    <div class="span10">
+      <#input type="text" id="keywords" name="article.keywords" value="${article.keywords!}" css=" input-xlarge"/>
+      <span class="help-inline">多个关键字，用空格分隔。</span>
+    </div>
+  </div> -->
+  <div class="control-group form-inline">
+    <label class="span2 control-label">${i18n("article.attr.target")}</label>
+    <div class="span10">
+      <#input type="text" id="target" name="article.target" value="${article.target!}" css="input-xlarge"/>
+      <label class="checkbox">
+	    <input type="checkbox" onclick="if(this.checked){$('#linkBody').show();$()}else{$('#linkBody').hide()}" ${isEmpty(article.href!)?'':'checked'}>${i18n("article.attr.href")}
+	  </label>
+    </div>
+  </div>
+  <div id="linkBody" class="control-group" ${isEmpty(article.href!)?'style="display:none"':''}>
+    <label class="span2 control-label">${i18n("article.attr.href")}</label>
+    <div class="span10">
+      <#input type="text" id="href" name="article.href" value="${article.href!}" css="input-xxlarge"/>
+      <span class="help-inline">将会跳转到其他网站</span>
+    </div>
+  </div><!-- 
+  <div class="control-group">
+    <label class="span2 control-label">${i18n("article.attr.summary")}</label>
+    <div class="span10">
+      <#input type="textarea" id="summary" name="article.summary" value="${article.summary!}" css="input-xlarge"/>
+    </div>
+  </div> -->
+  <div class="control-group">
+    <label class="span2 control-label">${i18n("article.attr.content")}</label>
+    <div class="span10">
+      <#ueditor type="textarea" id="editor" name="article.content" value="${article.content!}" style="width:1000px;height:260px;"/>
+    </div>
+  </div>
+  <div class="control-group">
+    <label class="span2 control-label">${i18n("article.attr.image")}</label>
+    <div class="span10">
+      <#cropper id="image" name="image" value="${strutil.replace(article.image!'','\\','-')}" width="350" height="212"/>
+    </div>
+  </div>
+  <div class="control-group">
+    <label class="span2 control-label">${i18n("article.attr.file")}</label>
+    <div class="span10">
+      <#webuploader id="file" name="article.file" value="${article.file!}"/>
+    </div>
+  </div><!-- 
+  <div class="control-group form-inline">
+    <label class="span2 control-label">${i18n("article.attr.weight")}</label>
+    <div class="span3">
+      <#input type="text" id="weight" name="article.weight" value="${article.weight!}" css="input-xlarge"/>
+      <label class="checkbox">
+	    <input type="checkbox" onclick="$('#weight').val(this.checked?'999':'0').attr('readonly','readonly')">${i18n("article.attr.top")}
+	  </label>
+    </div>
+    <label class="span1 control-label">${i18n("article.attr.weight_date")}</label>
+    <div class="span4">
+      <#input type="date" id="weight_date" name="article.weight_date" value="${article.weight_date!}" css="input-xlarge"/>
+   	  <span class="help-inline">权重越大排序越靠前，过期后取消置顶</span>
+    </div>
+  </div>
+  <div class="control-group">
+    <label class="span2 control-label">${i18n("article.attr.posid")}</label>
+    <div class="span9">
+      <label class="checkbox fl mr50"><input type="checkbox" id="posid" name="posid" value="0" class="mr4" ${article.posid! == '0,1'?'checked':''} ${article.posid! == '0'?'checked':''}/>首页焦点图</label>
+      <label class="checkbox fl mr50"><input type="checkbox" id="posid" name="posid" value="1" class="mr4" ${article.posid! == '0,1'?'checked':''} ${article.posid! == '1'?'checked':''}/>栏目文章推荐</label>
+    </div>
+  </div>
+  <div class="control-group">
+    <label class="span2 control-label">${i18n("common.sort")}</label>
+    <div class="span10">
+      <#input type="text" id="sort" name="article.sort" value="${article.sort!}" css="input-xlarge"/>
+    </div>
+  </div>
+  <div class="control-group">
+    <label class="span2 control-label">${i18n("common.memo")}</label>
+    <div class="span10">
+      <#input type="textarea" id="memo" name="article.memo" value="${article.memo!}" css=""/>
+    </div>
+  </div> -->
+  <script type="text/javascript">
+	//表单验证
+	$("#dataform").validate({
+		errorClass: "text-error ml10",
+		errorPlacement: function(error, element) {  
+			if(element.is("#category_name")){
+				error.appendTo(element.parent().parent()); 
+			}else{
+				error.appendTo(element.parent()); 
+			}
+    	}
+	});
+</script>
+<? } ?>

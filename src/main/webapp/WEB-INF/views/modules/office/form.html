@@ -1,0 +1,55 @@
+<? layout("/layouts/form.html",{"module":"office","operate":operate!}){ ?>
+  <input type="hidden" name="office.id" value="${office.id!}">
+  <div class="layui-form-item">
+    <label class="layui-form-label">${i18n("office.attr.name")}</label>
+    <div class="layui-input-block">
+      <#input type="text" id="name" name="office.name" value="${office.name!}" css="layui-input required"/>
+    </div>
+  </div>
+  <div class="layui-form-item">
+    <label class="layui-form-label">${i18n("office.attr.area")}</label>
+    <#selecttree model="office" key="area" label="${i18n('office.attr.area')}" hideValue="${office.area.id!}" showValue="${office.area.name!}" css="layui-input required" async="true" url="/area/tree"/>
+  </div>
+  <div class="layui-form-item">
+    <label class="layui-form-label">${i18n("office.attr.type")}</label>
+    <div class="layui-input-block">
+      <#input type="radio" id="type" name="office.type" value="${office.type!}" list="${dictList('office_type')}" css="layui-input required"/>
+    </div>
+  </div>
+  <div class="layui-form-item">
+    <label class="layui-form-label">${i18n("office.attr.address")}</label>
+    <div class="layui-input-block">
+      <#input type="text" id="address" name="office.address" value="${office.address!}" css="layui-input required"/>
+    </div>
+  </div>
+  <div class="layui-form-item">
+    <label class="layui-form-label">${i18n("office.attr.contact")}</label>
+    <div class="layui-input-block">
+      <#input type="text" id="contact" name="office.contact" value="${office.contact!}" css="layui-input"/>
+    </div>
+  </div>
+  <div class="layui-form-item">
+    <label class="layui-form-label">${i18n("office.attr.email")}</label>
+    <div class="layui-input-block">
+      <#input type="text" id="email" name="office.email" value="${office.email!}" css="layui-input email"/>
+    </div>
+  </div>
+  <div class="layui-form-item">
+    <label class="layui-form-label">${i18n("office.attr.phone")}</label>
+    <div class="layui-input-block">
+      <#input type="text" id="phone" name="office.phone" value="${office.phone!}" css="layui-input"/>
+    </div>
+  </div>
+  <div class="layui-form-item">
+    <label class="layui-form-label">${i18n("office.attr.fax")}</label>
+    <div class="layui-input-block">
+      <#input type="text" id="fax" name="office.fax" value="${office.fax!}" css="layui-input"/>
+    </div>
+  </div>
+  <div class="layui-form-item">
+    <label class="layui-form-label">${i18n("common.memo")}</label>
+    <div class="layui-input-block">
+      <#input type="textarea" id="memo" name="office.memo" css="layui-textarea"/>
+    </div>
+  </div>
+<? } ?>

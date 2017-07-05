@@ -1,0 +1,55 @@
+<? layout("/layouts/form.html",{"module":"dict","operate":operate!}){ ?>
+  <input type="hidden" id="id" name="dict.id" value="${dict.id!}">
+<form class="layui-form">
+	<div class="layui-form-item">
+	  <div class="layui-inline col-5">
+	    <label class="layui-form-label">${i18n("parent")}</label>
+	    <div class="layui-input-block" >
+	      <#selecttree model="dict" key="parent" label="${i18n('dict')}" hideValue="${dict.parent.id!}" showValue="${dict.parent.name!}" css="layui-input" async="true"  url="/dict/tree"/>
+	    </div>
+	   </div>
+	   <div class="layui-inline col-5">
+	    <label class="layui-form-label">${i18n("dict.attr.name")}</label>
+	    <div class="layui-input-block">
+	      <input type="text" id="name" name="dict.name" value="${dict.name!}" class="layui-input"/>
+	    </div>
+	   </div>
+  </div>
+  <div class="layui-form-item">
+	  <div class="layui-inline col-5">
+	    <label class="layui-form-label">${i18n("dict.attr.code")}</label>
+	    <div class="layui-input-block">
+	      <input type="text" id="code" name="dict.code" value="${dict.code!}" class="layui-input"/>
+	    </div>
+	  </div>
+	  <div class="layui-inline col-5">
+	    <label class="layui-form-label">${i18n("dict.attr.value")}</label>
+	    <div class="layui-input-block">
+	      <input type="text" id="value" name="dict.value" value="${dict.value!}" class="layui-input"/>
+	    </div>
+	  </div>
+  </div>
+  <div class="layui-form-item">
+	  <div class="layui-inline col-5">
+	    <label class="layui-form-label">${i18n("common.sort")}</label>
+	    <div class="layui-input-block">
+	      <input type="text" id="sort" name="dict.sort" value="${dict.sort!}" class="layui-input"/>
+	    </div>
+	   </div>
+  </div>
+ </form>
+  <script type="text/javascript">
+	$(document).ready(function() {
+	    $("#dataform").validate({
+	    	errorClass: "text-error ml10",
+	    	errorPlacement: function(error, element) {  
+	    	    if(element.is("#parent_name")){
+	    	    	error.appendTo(element.parent().parent()); 
+	    	    } else{
+	    	    	error.appendTo(element.parent()); 
+	    	    }
+	    	},
+	    });
+	});
+  </script>
+<? } ?>

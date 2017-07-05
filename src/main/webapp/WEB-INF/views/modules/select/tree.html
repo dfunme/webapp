@@ -1,0 +1,125 @@
+<div id="${key!}_tree_dialog" style="min-height: 400px; max-height:480px">
+  <ul id="${key!}_tree" class="ztree"></ul>
+</div>
+<script type="text/javascript">
+    var key, lastValue = "", nodeList = [];
+    var tree;
+    var setting = {
+<? if (async! == "true") { ?>
+        async: { 
+           	enable: true,
+           	dataType: "json",
+           	url: "${ctx!}${url!}",
+           	autoParam: ["id=parentId"]
+        },
+<? } ?>
+        callback: {
+           	beforeClick: function(id, node){
+<? if (checked! == "true") { ?>
+                tree.checkNode(node, !node.checked, true, true);
+                return false;
+<? } ?>
+            }, 
+            onDblClick: function(){
+                 top.$.jBox.getBox().find("button[value='ok']").trigger("click");
+            },
+            onNodeCreated: zTreeOnNodeCreated
+        },
+        data: {
+        	simpleData:{
+	            enable: true,
+	            idKey: "${idKey!'id'}",
+	            pIdKey: "${pIdKey!'pid'}",
+	            rootPId: "${rootPId!'0'}"
+	        }
+        },
+        check: {
+        	enable: "${checked!}",
+        	chkStyle: "${chkStyle!}",
+        	nocheckInherit:false,
+        	chkboxType: { "Y": "ps", "N": "ps" }
+        },
+        view: {
+        	selectedMulti: false,
+            fontCss: function(treeId, treeNode) {
+                return treeNode.highlight ? {"font-weight":"bold"} : {"font-weight":"normal"};
+            }
+        }
+    };
+    $(document).ready(function() {
+    	$.get("${ctx!}${url!}",function(data){
+	    	tree = $.fn.zTree.init($("#${key!}_tree"), setting, data);
+	    	<? if (async! != "true") { ?>
+	    		var nodes = tree.getNodesByParam("level", 0);
+				for(var i=0; i<nodes.length; i++) {
+					tree.expandNode(nodes[i], true, false, false);
+				}
+	    	<? } ?>
+    	})
+    	
+    	key = $("#keywords");
+		key.bind("focus", focusKey).bind("blur", blurKey).bind("change keydown cut input propertychange", searchNode);
+	});
+    
+    function zTreeOnNodeCreated(event, treeId, treeNode) {
+    	if($("#${key!}_id").val() != null && $("#${key!}_id").val() != ""){
+    		var ids = $("#${key!}_id").val().split(",");
+    		for(var i in ids){
+    			if(treeNode.id == ids[i]){
+    				$.fn.zTree.getZTreeObj(treeId).checkNode(treeNode, true, false);
+    				break;
+    			}
+    		}
+	    	$.fn.zTree.getZTreeObj(treeId).expandNode(treeNode, true, true, true);
+    	} 
+    };
+	function focusKey(e) {
+	    if (key.hasClass("empty")) {
+	        key.removeClass("empty");
+	    }
+	}
+	function blurKey(e) {
+	    if (key.get(0).value === "") {
+	        key.addClass("empty");
+	    }
+	    searchNode(e);
+	}
+	function searchNode(e) {
+	    // 取得输入的关键字的值
+	    var value = $.trim(key.get(0).value);
+	    
+	    // 按名字查询
+	    var keyType = "name";
+	    if (key.hasClass("empty")) {
+	        value = "";
+	    }
+	    
+	    // 如果和上次一次，就退出不查了。
+	    if (lastValue === value) {
+	        return;
+	    }
+	    
+	    // 保存最后一次
+	    lastValue = value;
+	    
+	    // 如果要查空字串，就退出不查了。
+	    if (value === "") {
+	        return;
+	    }
+	    updateNodes(false);
+	    nodeList = tree.getNodesByParamFuzzy(keyType, value);
+	    updateNodes(true);
+	}
+	function updateNodes(highlight) {
+	    for(var i=0, l=nodeList.length; i<l; i++) {
+	        nodeList[i].highlight = highlight;              
+	        tree.updateNode(nodeList[i]);
+	        tree.expandNode(nodeList[i].getParentNode(), true, false, false);
+	    }
+	}
+	function search() {
+	    $("#search").slideToggle(200);
+	    $("#txt").toggle();
+	    $("#keywords").focus();
+	}
+</script>

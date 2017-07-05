@@ -1,0 +1,113 @@
+<? layout("/layouts/column.html",{"module":"category","operate":operate!,"navigation":"category"}){ ?>
+  <script type="text/javascript">
+	var tree;
+	var setting = {
+		data: {
+			simpleData: {
+				enable: true,
+				idKey: 'id',
+				pIdKey: 'pid',
+				rootPId: '0'
+			}
+		},
+		<? if(shiro.hasPermission('category:edit')){ ?>
+	    view: {
+	        selectedMulti:false,
+	        addHoverDom: addHoverDom,
+	        removeHoverDom : removeHoverDom
+	    },
+	    edit: {
+	    	enable : true,
+	    	showRemoveBtn : showRemoveBtn,
+	    	showRenameBtn : false,
+	    	removeTitle : "${i18n('operate.delete')}"
+	    },
+	    <? } ?>
+		callback: {
+			onDblClick: viewNode,
+			<? if(shiro.hasPermission('category:edit')){ ?>
+    		beforeRemove: function(){
+    			return confirm("确定要删除该数据吗？");
+			},
+			onRemove:removeNode,
+			<? } ?>
+			onAsyncSuccess: zTreeOnAsyncSuccess  
+		}
+	};
+	//新增节点
+	function addHoverDom(treeId, treeNode) {
+		var sObj = $("#" + treeNode.tId + "_span");
+		if (treeNode.editNameFlag || $("#addBtn_" + treeNode.tId).length > 0) return;
+		var addStr = "<span class='button add' id='addBtn_" + treeNode.tId
+			+ "' title='${i18n('operate.add')}' onfocus='this.blur();'></span>";
+		sObj.after(addStr);
+		var addBtn = $("#addBtn_" + treeNode.tId);
+		if (addBtn) addBtn.bind("click", function(){
+			$('#rightform').load('${ctx!}/category/add/' + treeNode.id);
+		});
+		if (treeNode.editNameFlag || treeNode.pid == 0 || $("#editBtn_" + treeNode.tId).length > 0) return;
+		var editStr = "<span class='button edit' id='editBtn_" + treeNode.tId
+			+ "' title='${i18n('operate.edit')}' onfocus='this.blur();'></span>";
+		sObj.after(editStr);
+		var editBtn = $("#editBtn_" + treeNode.tId);
+		if (editBtn) editBtn.bind("click", function(){
+			$('#rightform').load('${ctx!}/category/edit/' + treeNode.id);
+		});
+	}
+	//移除新增按钮
+	function removeHoverDom(treeId, treeNode) {
+		$("#addBtn_" + treeNode.tId).unbind().remove();
+		$("#editBtn_" + treeNode.tId).unbind().remove();
+	}
+	//显示删除按钮
+	function showRemoveBtn(treeId, treeNode) {
+		if (treeNode.pid == 0){
+			return false;
+		}
+		return true;
+	}
+	//查看节点 
+	function viewNode(event, treeId, treeNode) {
+		$('#rightform').load('${ctx!}/category/view/' + treeNode.id);
+	}
+	//删除节点
+	function removeNode(event, treeId, treeNode, isCancel){
+		$.ajax({
+			url: '${ctx!}/category/delete/' + treeNode.id,
+			type: 'GET',
+			dataType: 'json',
+			success: function(result){
+				if(result)
+					layer.alert("删除成功");
+				else
+					layer.alert("删除失败");
+			}
+		});
+	}
+	//初始化树
+	$(document).ready(function() {
+		$.ajax({
+			url : '${ctx!}/category/tree',
+			type : 'get',
+    		success : function(data){
+    			tree = $.fn.zTree.init($("#category_tree"), setting, data);	
+    		}
+		});
+	});
+	//异步展开所有节点
+	var firstAsyncSuccessFlag = 0;
+	function zTreeOnAsyncSuccess(event, treeId, msg) { 
+		if (firstAsyncSuccessFlag == 0) { 
+			var treeObj = $.fn.zTree.getZTreeObj(treeId); 
+			var node = treeObj.getNodeByParam("isParent",true,null);
+			treeObj.expandNode(node,true,true,true);
+			var nodes = treeObj.getNodesByParam("isParent",true,node);
+			if(nodes.length > 0){
+				for(var i = 0; i < nodes.length; i++){
+					treeObj.expandNode(nodes[i],true,true,true);
+				}
+			}
+		} 
+	} 
+  </script>
+<? } ?>

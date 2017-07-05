@@ -1,0 +1,69 @@
+<? layout("/layouts/form.html",{"module":"user","operate":operate!}){ ?>
+  <input type="hidden" id="id" name="user.id" value="${user.id!}">
+  <div class="layui-form-item">
+    <div class="layui-inline col-6">
+      <label class="layui-form-label">${i18n("user.attr.name")}</label>
+      <div class="layui-input-block">
+        <#input type="text" id="name" name="user.name" value="${user.name!}" css="layui-input required"/>
+      </div>
+    </div>
+    <div class="layui-inline col-6">
+      <label class="layui-form-label">${i18n("user.attr.office")}</label>
+      <div class="layui-input-block">
+        <#selecttable key="office" model="user" label="${i18n('office')}" hideValue="${user.office.id!}" showValue="${user.office.name!}" selecttype="radio" dataUrl="office/datalist" css="layui-input required" columns="name,address"/>
+      </div>
+    </div>
+  </div>
+  <div class="layui-form-item">
+    <div class="layui-inline col-6">
+      <label class="layui-form-label">${i18n("user.attr.username")}</label>
+      <div class="layui-input-block">
+        <#input type="text" id="username" name="user.username" value="${user.username!}" css="layui-input required"/>
+      </div>
+    </div>
+    <div class="layui-inline col-6">
+      <label class="layui-form-label">${i18n("user.attr.email")}</label>
+      <div class="layui-input-block">
+        <#input type="text" id="email" name="user.email" value="${user.email!}" css="layui-input required"/>
+      </div>
+    </div>
+  </div>
+  <div class="layui-form-item">
+    <div class="layui-inline">
+      <label class="layui-form-label">${i18n("role")}</label>
+      <div class="layui-input-block">
+      <? for(item in roleList!){ ?>
+        <input type="radio" name="user.role_id" value="${item.id!}" title="${item.name!}" ${item.id! == user.role_id!?'checked':''}>
+      <? } ?>
+      </div>
+    </div>
+  </div>
+  <div class="layui-form-item">
+    <div class="layui-inline col-6">
+      <label class="layui-form-label">${i18n("user.attr.password")}</label>
+      <div class="layui-input-block">
+        <#input type="text" id="password" name="user.password" css="layui-input"/>
+      </div>
+    </div>
+    <div class="layui-inline col-6">
+      <label class="layui-form-label">${i18n("user.attr.repeat")}</label>
+      <div class="layui-input-block">
+        <#input type="text" id="repeat" name="repeat" equalTo="#password" css="layui-input"/>
+      </div>
+    </div>
+  </div>
+  <div class="layui-form-item">
+    <div class="layui-inline col-6">
+      <label class="layui-form-label">${i18n("user.attr.phone")}</label>
+      <div class="layui-input-block">
+        <#input type="text" id="phone" name="user.phone" value="${user.phone!}" css="layui-input"/>
+      </div>
+    </div>
+    <div class="layui-inline col-6">
+      <label class="layui-form-label">${i18n("user.attr.mobile")}</label>
+      <div class="layui-input-block">
+        <#input type="text" id="mobile" name="user.mobile" value="${user.mobile!}" css="layui-input"/>
+      </div>
+    </div>
+  </div>
+<? } ?>

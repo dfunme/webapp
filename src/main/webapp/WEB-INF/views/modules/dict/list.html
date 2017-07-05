@@ -1,0 +1,35 @@
+<? layout("/layouts/list.html",{"module":"dict","operate":"list","add":true}){ ?>
+  <table id="dict_tree_table" class="layui-table table">
+    <thead>
+      <tr>
+        <th>${i18n("dict.attr.name")}</th>
+        <th>${i18n("dict.attr.code")}</th>
+        <th>${i18n("dict.attr.value")}</th>
+        <th>${i18n("common.sort")}</th>
+        <th class="w100">${i18n("operate")}</th>
+      </tr>
+    </thead>
+    <tbody>
+	<? for(item in list!){ ?>
+      <tr id="${item.id!}" pId="${item.parent_id != 1?item.parent_id:'0'}">
+        <td>${item.name!}</td>
+        <td>${item.code!}</td>
+        <td>${item.value!}</td>
+        <td>${item.sort!}</td>
+        <td class="tc"><a href="${ctx!}/dict/edit/${item.id}" title="${i18n('operate.edit')}"><i class="fa fa-edit mr5"></i></a>
+            <a href="javascript:remove(${item.id});" title="${i18n('operate.delete')}"><i class="fa fa-remove mr5"></i></a>
+            <a href="${ctx!}/dict/add/${item.id}" title="${i18n('operate.addson')}"><i class="fa fa-plus"></i></a></td>
+      </tr>
+    <? }elsefor{ ?>
+      <tr><td colspan="5">暂无数据</td></tr>
+    <? } ?>
+    </tbody>
+  </table>
+  <link href="${ctx!}/static/plugins/treeTable/themes/vsStyle/treeTable.min.css" rel="stylesheet" type="text/css" />
+  <script src="${ctx!}/static/plugins/treeTable/jquery.treeTable.js" type="text/javascript"></script>
+  <script type="text/javascript">
+    $(document).ready(function() {
+        $("#dict_tree_table").treeTable();
+    });
+  </script>
+<? } ?>

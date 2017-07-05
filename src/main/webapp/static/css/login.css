@@ -1,0 +1,82 @@
+@charset "utf-8";
+
+/* main */
+.login-main{
+  position: fixed;
+  margin: 10% auto;
+  background-color: #fff;
+  font-family:Microsoft YaHei;
+  background-color: rgba(255, 255, 255, 0.407843);
+  border-radius: 10px;
+  color: aliceblue;
+}
+.login-head{
+  background-color:#0190d2;
+  height:120px;
+}
+.login-head .brand img {
+  min-width: 670px;
+}
+.login-form {
+  width: 350px;
+  height: 300px;
+  margin: 40px auto;
+}
+.login-form .login-form-heading{
+  color:#196cb4;
+  font-size:26px;
+  font-weight: normal;
+}
+.login-form .login-form-heading span{
+  font-size:18px;
+  color:#c2c2c2;
+  margin-left:15px;
+}
+.login-form .checkbox {
+  margin-bottom: 10px;
+}
+.login-form .form-group{
+  position:relative;
+  color:#666;
+}
+input:focus {  
+  background-color: #FF6;  
+} 
+.login-form .layui-form-item input[type="text"], .login-form .layui-form-item input[type="password"] {
+  font-size: 16px;
+  height: 40px;
+  margin-bottom: 15px;
+  padding:0 5px 0 30px;
+  background-color: #fff;
+}
+.login-form .btn-blue{
+  width:100%;
+  padding:8px 0;
+  font-weight:bold;
+  text-align:center;
+  color:#fff;
+  background-color:#1286E3;
+  border:0;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
+}
+.login-form .btn-blue:hover{
+  background-color:#0c73c5;
+}
+.login-foot{
+  width:100%;
+  text-align:center;
+  color:#fff;
+  line-height:50px;
+  background-color:#0190d2;
+}
+.text-error {
+  margin-top: 15px;
+}
+.login-form .layui-form-item input[type=checkbox]{
+  display:block;
+}
+.layui-form.login-form .layui-form-item.form-group .layui-input{
+  background-color:#fff;
+}

@@ -1,0 +1,58 @@
+<div class="layui-form-item">
+  <div class="layui-inline col-4">
+    <label class="layui-form-label">${i18n("log.attr.office")}</label>
+    <div class="layui-input-block">
+      <input type="text" id="office" name="office" value="${office!}" class="layui-input"/>
+    </div>
+  </div>
+  <div class="layui-inline col-4">
+    <label class="layui-form-label">${i18n("common.createBy")}</label>
+    <div class="layui-input-block">
+      <input type="text" id="createBy" name="createBy" value="${createBy!}" class="layui-input"/>
+    </div>
+  </div>
+  <div class="layui-inline col-4">
+    <label class="layui-form-label">${i18n("log.attr.type")}</label>
+    <div class="layui-input-block pt10">
+      <label class="layui-inline pr10"><input type="checkbox" name="type" value="1" class="fl mt5"/>${i18n("log.type.login")}</label>
+  	  <label class="layui-inline pr10"><input type="checkbox" name="type" value="2" class="fl mt5"/>${i18n("log.type.access")}</label>
+  	  <label class="layui-inline pr10"><input type="checkbox" name="type" value="3" class="fl mt5"/>${i18n("log.type.exception")}</label>
+    </div>
+  </div>
+</div>
+<div class="layui-form-item">
+  <div class="layui-inline col-4">
+    <label class="layui-form-label">${i18n("log.attr.requestUri")}</label>
+    <div class="layui-input-block">
+      <input type="text" id="requestUri" name="requestUri" value="${requestUri!}" class="layui-input"/>
+    </div>
+  </div>
+  <div class="layui-inline col-4">
+    <label class="layui-form-label">${i18n("log.attr.userip")}</label>
+    <div class="layui-input-block">
+      <input type="text" id="userip" name="userip" value="${userip!}" class="layui-input"/>
+    </div>
+  </div>
+  <div class="layui-inline col-4">
+    <div class="layui-form-item">
+      <label class="layui-form-label">${i18n("common.createDate")}</label>
+      <div class="layui-input-inline" style="width: 100px;">
+        <#input type="date" id="createDateFrom" name="createDateFrom" value="${createDateFrom!}" onclick="layui.laydate({elem: this})" css="layui-input"/>
+      </div>
+      <div class="layui-form-mid tc">${i18n("common.to")}</div>
+      <div class="layui-input-inline" style="width: 100px;">
+        <#input type="date" id="createDateTo" name="createDateTo" value="${createDateTo!}" onclick="layui.laydate({elem: this})" css="layui-input"/>
+      </div>
+    </div>
+  </div>
+</div>
+<script type="text/javascript">
+	$("input[name='type']").each(function(){
+		var val = $(this).attr("value");
+		<? for(item in type!){ ?>
+		if(val == ${item}){
+			$(this).attr("checked","checked");
+		}
+		<? } ?>
+	});
+</script>

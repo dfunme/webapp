@@ -1,0 +1,39 @@
+<? layout("/layouts/sublist.html",{"module":"project","submodule":"version","operate":"version.list","add":true,"key":projectId!}){ ?>
+  <table class="table table-bordered table-hover">
+    <thead>
+      <tr>
+        <th class="w50">${i18n("common.index")}</th>
+        <th>${i18n("version.attr.name")}</th>
+        <th class="w100">${i18n("version.attr.type")}</th>
+        <th class="w100">${i18n("version.attr.version")}</th>
+        <th class="w100">${i18n("version.attr.status")}</th>
+        <th class="w100">${i18n("version.attr.size")}</th>
+        <th class="w100">${i18n("version.attr.hits")}</th>
+        <th class="w150">${i18n("version.attr.update")}</th>
+        <th class="w100">${i18n("operate")}</th>
+      </tr>
+    </thead>
+    <tbody>
+    <? for(item in page.list){ ?>
+      <tr>
+        <td class="tc">${(page.pageNumber-1)*page.pageSize+itemLP.index}</td>
+        <td>${item.name!}</td>
+        <td class="tc">${dict(item.type!,'platform_type','其他')}</td>
+        <td class="tc">${item.version!}</td>
+        <td class="tc">${dict(item.status!,'version_status','')}</td>
+        <td class="tr">${item.size!}</td>
+        <td class="tr">${item.hits!}</td>
+        <td class="tc">${item.update_date!,dateFormat="yyyy-MM-dd HH:mm:ss"}</td>
+        <td class="tc">
+          <a href="${ctx!}/project/version/edit/${item.id}" title="${i18n('operate.edit')}"><i class="fa fa-edit mr5"></i></a>
+          <a href="javascript:delIds2(${item.id},${projectId!});" title="${i18n('operate.delete')}"><i class="fa fa-remove mr5"></i></a>
+          <a href="${ctx!}/file/download?url=${item.url!}&name=${item.name}" title="${i18n('operate.download')}"><i class="fa fa-download mr5"></i></a>
+        </td>
+      </tr>
+    <? }elsefor{ ?>
+      <tr><td colspan="9">暂无数据</td></tr>
+    <? } ?>
+    </tbody>
+  </table>
+  <#pagination page="${page}"/>
+<? } ?>

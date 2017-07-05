@@ -1,0 +1,32 @@
+<div class="control-group">
+  <label class="span1 control-label">${i18n("office.attr.name")}</label>
+  <div class="span3">
+    <input type="text" id="office" name="office" value="${office!}" class=""/>
+  </div>
+  <label class="span1 control-label">${i18n("order.attr.contractno")}</label>
+  <div class="span3">
+    <input type="text" id="contractno" name="contract_no" value="${contract_no!}" class=""/>
+  </div>
+</div>
+<div class="control-group">
+  <label class="span1 control-label">${i18n("order.attr.begindate")}</label>
+  <div class="span3">
+      <div class="ww45 fl">
+        <input type="text" id="beginDateFrom" name="beginDateFrom" value="${beginDateFrom!}" onFocus="WdatePicker({maxDate:'#F{$dp.$D(\'beginDateTo\')}'})" class="Wdate input-small"/>
+      </div>
+      <div class="ww10 mt5 fl tc">${i18n("common.to")}</div>
+      <div class="ww45 fl">
+        <input type="text" id="beginDateTo" name="beginDateTo" value="${beginDateTo!}" onFocus="WdatePicker({minDate:'#F{$dp.$D(\'beginDateFrom\')}'})" class="Wdate input-small"/>
+      </div>
+  </div>
+  <label class="span1 control-label">${i18n("order.attr.enddate")}</label>
+  <div class="span3">
+      <div class="ww45 fl">
+        <input type="text" id="endDateFrom" name="endDateFrom" value="${endDateFrom!}" onFocus="WdatePicker({maxDate:'#F{$dp.$D(\'endDateTo\')}'})" class="Wdate input-small"/>
+      </div>
+      <div class="ww10 mt5 fl tc">${i18n("common.to")}</div>
+      <div class="ww45 fl">
+        <input type="text" id="endDateTo" name="endDateTo" value="${endDateTo!}" onFocus="WdatePicker({minDate:'#F{$dp.$D(\'endDateFrom\')}'})" class="Wdate input-small"/>
+      </div>
+  </div>
+</div>

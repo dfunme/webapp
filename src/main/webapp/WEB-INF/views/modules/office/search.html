@@ -1,0 +1,28 @@
+<div class="layui-form-item">
+  <label class="layui-form-label">${i18n("office.attr.name")}</label>
+  <div class="layui-input-inline">
+    <input type="text" id="name" name="name" value="${name!}" class="layui-input"/>
+  </div>
+  <label class="layui-form-label">${i18n("office.attr.area")}</label>
+  <div class="layui-input-inline">
+    <input type="text" id="area" name="area" value="${area!}" class="layui-input"/>
+  </div>
+  <label class="layui-form-label">${i18n("office.attr.contact")}</label>
+  <div class="layui-input-inline">
+    <input type="text" id="contact" name="contact" value="${contact!}" class="layui-input"/>
+  </div>
+</div>
+<div class="layui-form-item">
+  <label class="layui-form-label">${i18n("office.attr.type")}</label>
+  <div class="layui-input-inline">
+    <#input type="select" id="type" name="type" key="code" value="${type!}" list="${dictList('office_type')}" css="layui-input"/>
+  </div>
+  <label class="layui-form-label">${i18n("office.attr.address")}</label>
+  <div class="layui-input-inline">
+    <input type="text" id="address" name="address" value="${address!}" class="layui-input"/>
+  </div>
+  <label class="layui-form-label">${i18n("office.attr.phone")}</label>
+  <div class="layui-input-inline">
+    <input type="text" id="phone" name="phone" value="${phone!}" class="layui-input"/>
+  </div>
+</div>

@@ -1,0 +1,42 @@
+<? layout("/layouts/form.html",{"module":"project","operate":operate!}){ ?>
+  <input type="hidden" name="project.id" value="${project.id!}">
+  <div class="control-group">
+    <label class="span2 control-label required-lable">${i18n("project.attr.name")}</label>
+    <div class="span4">
+      <#input type="text" id="name" name="project.name" value="${project.name!}" css="input-xlarge required"/>
+    </div>
+    <label class="span2 control-label required-lable">${i18n("project.attr.customer")}</label>
+    <div class="span4">
+      <#input type="text" id="customer" name="project.customer" value="${project.customer!}" css="input-xlarge required"/>
+    </div>
+  </div>
+  <div class="control-group">
+    <label class="span2 control-label">${i18n("project.attr.logo")}</label>
+    <div class="span4">
+      <#cropper id="logo" name="logo" value="${strutil.replace(project.logo!'','\\','-')}" width="512" height="512"/>
+    </div>
+    <label class="span2 control-label required-lable">${i18n("project.attr.package")}</label>
+    <div class="span4">
+      <#input type="text" id="package" name="project.package" value="${project.package!}" css="input-xlarge required"/>
+    </div>
+  </div>
+  <div class="control-group">
+    <label class="span2 control-label">${i18n("project.attr.intro")}</label>
+    <div class="span10">
+      <#input type="textarea" id="intro" name="project.intro" value="${project.intro!}" css="input-xlarge required"/>
+    </div>
+  </div>
+  <div class="control-group">
+    <label class="span2 control-label">${i18n("common.memo")}</label>
+    <div class="span10">
+      <#input type="textarea" id="memo" name="project.memo" value="${project.memo!}"/>
+    </div>
+  </div>
+  <script type="text/javascript">
+	$(document).ready(function() {
+	    $("#dataform").validate({
+	    	errorClass: "text-error ml10"
+	    });
+	});
+  </script>
+<? } ?>

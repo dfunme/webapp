@@ -1,0 +1,40 @@
+<? layout("/layouts/list.html",{"module":"order","operate":"list","add":true,"search":true}){ ?>
+  <table class="layui-table table">
+    <thead>
+      <tr>
+        <th class="w50">${i18n("common.index")}</th>
+        <th>${i18n("office.attr.name")}</th>
+        <th class="w100">${i18n("order.attr.contractno")}</th>
+        <th class="w100">${i18n("order.attr.begindate")}</th>
+        <th class="w100">${i18n("order.attr.enddate")}</th>
+        <? if(shiro.hasPermission('order:edit')){ ?>
+        <th class="w100">${i18n("operate")}</th>
+        <?}?>
+      </tr>
+    </thead>
+    <tbody>
+    <? for(item in page.list){ ?>
+      <tr>
+        <td class="tc">${(page.pageNumber-1)*page.pageSize+itemLP.index}</td>
+        <td>${item.office.name!}</td>
+        <td>${item.contract_no!}</td>
+        <td>${item.begin_date!}</td>
+        <td>${item.end_date!}</td>
+		<? if(shiro.hasPermission('order:edit')){ ?>        
+	        <td class="tc">
+	          <a href="${ctx!}/order/edit/${item.id}" title="${i18n('operate.edit')}"><i class="fa fa-edit mr5"></i></a>
+	          <? if(status!'0' == '0'){ ?>
+	          <a href="javascript:remove(${item.id});" title="${i18n('operate.delete')}"><i class="fa fa-remove mr5"></i></a>
+	          <? }else{ ?>
+	          <a href="javascript:resume(${item.id});" title="${i18n('operate.resume')}"><i class="fa fa-check mr5"></i></a>
+	          <? } ?>
+	        </td>
+        <?}?>
+      </tr>
+    <? }elsefor{ ?>
+      <tr><td colspan="6" class="tc">暂无数据</td></tr>
+    <? } ?>
+    </tbody>
+  </table>
+  <#pagination page="${page!}"/>
+<? } ?>

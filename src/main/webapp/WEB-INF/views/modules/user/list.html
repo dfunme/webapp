@@ -1,0 +1,20 @@
+<? layout("/layouts/list.html",{"module":"user","operate":"list","add":true,"search":true}){ ?>
+  <div class="layui-clear w oh mt30">
+    <ul class="info-card-ul">
+    <? for(item in page.list){ ?>
+      <li class="info-card col-2 oh p10 h150">
+        <div class="info-card-del"><i class="fa fa-remove"></i></div>
+        <div class="layui-clear w">
+          <div class="col-5"><a href=""><img src=""  class="mb10"></a></div>
+          <div class="col-6"><p class="layui-elip">姓名：${item.name!}</p><p class="layui-elip">账号：${item.username!}</p></div>
+        </div>
+        <p class="layui-elip"><a href="">单位：${item.office.name!}</a></p>
+        <p class="layui-elip"><a href="">角色：${item.role.name!}</a></p>
+      </li>
+    <? }elsefor{ ?>
+      <li>暂无数据</li>
+    <? } ?>
+    </ul>
+  </div>
+  <div id="page1" class="fr"></div>
+<? } ?>
