@@ -1,0 +1,7 @@
+#include("area.sql")
+#include("common.sql")
+#include("dict.sql")
+#include("log.sql")
+#include("office.sql")
+#include("role.sql")
+#include("user.sql")
