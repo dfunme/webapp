@@ -1,16 +1,10 @@
-<? layout("/layouts/form.html",{"module":"role","operate":operate!}){ ?>
+<? layout("/layouts/form.html",{"module":"role","operate":operate!,"id":role.id!}){ ?>
   <input type="hidden" id="id" name="role.id" value="${role.id!}">
   <div class="control-group">
     <label class="span2 control-label">${i18n("role.attr.name")}</label>
     <div class="span4">
       <#input type="text" id="name" name="role.name" value="${role.name!}" css="input-xlarge required"/>
     </div>
-    <label class="span2 control-label">${i18n("role.attr.code")}</label>
-    <div class="span4">
-      <#input type="text" id="code" name="role.code" value="${role.code!}" css="input-xlarge required"/>
-    </div>
-  </div>
-  <div class="control-group">
     <label class="span2 control-label">${i18n("common.sort")}</label>
     <div class="span4">
       <#input type="text" id="sort" name="role.sort" value="${role.sort!}" css="input-xlarge digits required"/>

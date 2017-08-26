@@ -3,27 +3,22 @@
     <thead>
       <tr>
         <th class="w50">${i18n("common.index")}</th>
-        <th class="sort name">${i18n("role.attr.name")}</th>
-        <th class="sort code">${i18n("role.attr.code")}</th>
-        <th class="sort sort">${i18n("common.sort")}</th>
-        <th class="w100">${i18n("operate")}</th>
+        <th class="w100">${i18n("role.attr.name")}</th>
+        <th class="">${i18n("role.attr.permission")}</th>
+        <th class="w50">${i18n("common.sort")}</th>
       </tr>
     </thead>
     <tbody>
     <? for(item in page.list!){ ?>
       <tr>
-        <td class="tc">${(page.pageNumber-1)*page.pageSize+itemLP.index}</td>
-        <td class="tc"><a href="${ctx!}/role/view/${item.id}" title="${i18n('operate.view')}">${item.name!}</a></td>
-        <td class="tc">${item.code!}</td>
-        <td class="tc">${item.sort!}</td>
-        <td class="tc">
-          <a href="${ctx!}/role/edit/${item.id}" title="${i18n('operate.edit')}"><i class="fa fa-edit mr5"></i></a>
-          <a href="javascript:remove(${item.id});" title="${i18n('operate.delete')}"><i class="fa fa-remove mr5"></i></a>
-        </td>
+        <td>${(page.pageNumber-1)*page.pageSize+itemLP.index}</td>
+        <td><a href="${ctx!}/role/view/${item.id}" title="${i18n('operate.view')}">${item.name!}</a></td>
+        <td>${item.permission!}</td>
+        <td>${item.sort!}</td>
       </tr>
     <? }elsefor{ ?>
       <tr>
-        <td colspan="5">暂无数据</td>
+        <td colspan="5">${i18n("none")}</td>
       </tr>
     <? } ?>
     </tbody>

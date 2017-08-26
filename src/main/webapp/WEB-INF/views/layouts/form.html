@@ -9,16 +9,14 @@
   <hr/>
   <form id="dataform" method="post" action="${ctx!}/${module!}/${operate! == 'add'?'save':'update'}" class="layui-form">
     <div class="layui-clear pb20">
-      <div class="add-btn fl mt5">
-        <a href="javascript:history.go(-1);"><i class="fa fa-reply mr5"></i>${i18n("operate.return")}</a>
-      </div>
+      <a href="javascript:history.go(-1);" class="layui-btn layui-btn-small layui-btn-primary"><i class="fa fa-reply mr5"></i>${i18n("operate.return")}</a>
+      <? if(operate! == 'view'){ ?>
+      <a href="${ctx!}/${module!}/edit/${id!}" class="layui-btn layui-btn-small layui-btn-primary"><i class="fa fa-edit mr5"></i>${i18n("operate.edit")}</a>
+      <? } ?>
+      <? if(operate! == 'add'||operate! == 'edit'){ ?>
+      <button type="submit" class="layui-btn layui-btn-small layui-btn-normal"><i class="fa fa-save mr5"></i>${i18n("operate.save")}</button>
+      <? } ?>
     </div>
     ${layoutContent}
-    <? if(operate! == 'add'||operate! == 'edit'){ ?>
-    <div class="tc mt20">
-      <button type="submit" class="layui-btn layui-btn-normal"><i class="fa fa-save mr5"></i>${i18n("operate.save")}</button>
-    </div>
-    <? } ?>
   </form>
-
 <? } ?>

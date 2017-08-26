@@ -18,15 +18,13 @@
     <link rel="stylesheet" type="text/css" href="${ctx!}/static/css/login.css" />
   </head>
   <body>
-    <div class="login-main">
-      <form class="layui-form login-form">
+    <div class="login-form">
+      <h1>${i18n('system.name')}</h1>
+      <form class="layui-form">
         <div class="layui-form-item">
-          <h2 class="login-form-heading">${i18n('system.name')}</h2>
-        </div>
-        <div class="layui-form-item form-group">
           <input type="text" id="username" name="username" class="layui-input" placeholder="${i18n('login.username')}">
         </div>
-        <div class="layui-form-item form-group">
+        <div class="layui-form-item">
           <input type="password" id="password" name="password" class="layui-input" placeholder="${i18n('login.password')}">
         </div>
         <div class="layui-form-item">
