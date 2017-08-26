@@ -20,7 +20,7 @@ public class Global {
 	public static final String ROUTE_PATH = "route.path";
 	public static final String MODEL_PATH = "model.path";
 	public static final String SQL_PATH = "/db";
-	public static final String SQL_TEMPLATE = "template.sql";
+	public static final String SQL_TEMPLATE = "all.sql";
 
 	// DEVELOPER MODE
 	public static final String DEV_MODE = "dev_mode";

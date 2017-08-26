@@ -28,7 +28,7 @@ public class LoginController extends Controller {
 	 */
 	@RequiresUser
 	public void index() {
-		redirect("/index");
+		render("/index.html");
 	}
 
 	/**

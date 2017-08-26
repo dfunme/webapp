@@ -186,7 +186,7 @@ public class ShiroInterceptor implements Interceptor {
 					}
 				}
 			}
-			logger.info("authentication [{}] pass", actionKey);
+			logger.debug("authentication [{}] pass", actionKey);
 		} catch (UnauthenticatedException uae) {
 			// RequiresGuest，RequiresAuthentication，RequiresUser，未满足时，抛出未经授权的异常。
 			// 如果没有进行身份验证，返回HTTP401状态码,或者跳转到默认登录页面
