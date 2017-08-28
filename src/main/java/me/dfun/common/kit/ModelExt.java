@@ -29,11 +29,11 @@ public class ModelExt<M extends ModelExt<?>> extends Model<M> {
 	/**
 	 * 获取缓存对象
 	 */
-	public M findFirstByCache(Long userId) {
+	public M findFirstByCache(Long id) {
 		List<Object> list = Lists.newArrayList();
 		list.add(getTable());
-		list.add(userId);
-		return findFirstByCache(getCacheKey(), userId, getSql("common.findById"), list);
+		list.add(id);
+		return findFirstByCache(getCacheKey(), id, getSql("common.findById"), list);
 	}
 
 	/**
