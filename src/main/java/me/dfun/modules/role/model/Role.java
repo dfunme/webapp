@@ -3,11 +3,9 @@ package me.dfun.modules.role.model;
 import java.util.List;
 import java.util.Map;
 
-import com.jfinal.plugin.activerecord.Page;
-
 import me.dfun.common.annotation.Table;
 import me.dfun.common.kit.ModelExt;
-import me.dfun.common.kit.QueryKit;
+import me.dfun.common.kit.Response;
 
 /**
  * 角色
@@ -20,10 +18,8 @@ public class Role extends ModelExt<Role> {
 	/**
 	 * 分页查询
 	 */
-	public Page<Role> paginate(Map<String, Object> map) {
-		int pageNumber = QueryKit.getInt(map, "pageNumber", 1);
-		int pageSize = QueryKit.getInt(map, "pageSize", 10);
-		return paginate(pageNumber, pageSize, getSqlPara("role.paginate", map));
+	public Response paginate(Map<String, Object> map) {
+		return paginate("role.paginate", map);
 	}
 
 	/**

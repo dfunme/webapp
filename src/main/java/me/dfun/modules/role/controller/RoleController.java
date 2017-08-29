@@ -31,9 +31,16 @@ public class RoleController extends Controller {
 	 */
 	@RequiresPermissions("role:view")
 	public void index() {
-		keepPara();
-		setAttr("page", Role.dao.paginate(QueryKit.getParam(getRequest())));
 		render("list.html");
+	}
+
+	/**
+	 * 列表数据
+	 */
+	@RequiresPermissions("role:view")
+	public void page() {
+		keepPara();
+		renderJson(Role.dao.paginate(QueryKit.getParam(getRequest())));
 	}
 
 	/**
