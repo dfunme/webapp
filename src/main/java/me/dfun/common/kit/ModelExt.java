@@ -4,7 +4,7 @@ import java.sql.Timestamp;
 import java.util.Date;
 import java.util.List;
 
-import com.google.common.collect.Lists;
+import com.jfinal.kit.Kv;
 import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.activerecord.Model;
 import com.jfinal.plugin.activerecord.Record;
@@ -30,10 +30,9 @@ public class ModelExt<M extends ModelExt<?>> extends Model<M> {
 	 * 获取缓存对象
 	 */
 	public M findFirstByCache(Long id) {
-		List<Object> list = Lists.newArrayList();
-		list.add(getTable());
-		list.add(id);
-		return findFirstByCache(getCacheKey(), id, getSql("common.findById"), list);
+		StringBuffer sql = new StringBuffer();
+		sql.append("select * from ").append(getTable()).append(" where id = ?");
+		return findFirstByCache(getCacheKey(), id, sql.toString(), id);
 	}
 
 	/**
@@ -61,11 +60,9 @@ public class ModelExt<M extends ModelExt<?>> extends Model<M> {
 		if (get(QueryKit.KEY_PARENT_IDS) != null) {
 			String oldParentIds = getStr(QueryKit.KEY_PARENT_IDS);
 			// 更新子节点 parentIds
-			List<Object> pl = Lists.newArrayList();
-			pl.add(getTable());
-			pl.add("%," + getLong(QueryKit.KEY_ID) + ",%");
-			List<M> rl = find(getSql("common.findByParentIds"), pl);
-			for (M m : rl) {
+			Kv param = Kv.by("table", getTable()).set("parentIds", "%," + getLong(QueryKit.KEY_ID) + ",%");
+			List<M> sl = find(getSqlPara("common.findByParentIds", param));
+			for (M m : sl) {
 				m.set(QueryKit.KEY_PARENT_IDS,
 						m.getStr(QueryKit.KEY_PARENT_IDS).replace(oldParentIds, getStr(QueryKit.KEY_PARENT_IDS)));
 				m.update();
@@ -78,7 +75,7 @@ public class ModelExt<M extends ModelExt<?>> extends Model<M> {
 	 * 逻辑删除
 	 */
 	public boolean deleteById(Long id) {
-		return set(QueryKit.KEY_ID, id).set(QueryKit.KEY_DEL_FLAG, "1").update();
+		return set(QueryKit.KEY_ID, id).set(QueryKit.KEY_STATUS, "0").update();
 	}
 
 	/**
@@ -94,7 +91,7 @@ public class ModelExt<M extends ModelExt<?>> extends Model<M> {
 	 * 逻辑恢复
 	 */
 	public boolean resumeById(Long id) {
-		return set(QueryKit.KEY_ID, id).set(QueryKit.KEY_DEL_FLAG, "0").update();
+		return set(QueryKit.KEY_ID, id).set(QueryKit.KEY_STATUS, "1").update();
 	}
 
 	/**
@@ -165,11 +162,7 @@ public class ModelExt<M extends ModelExt<?>> extends Model<M> {
 	 * 获取树列表
 	 */
 	public List<Record> getTree(Long parentId) {
-		List<Object> pl = Lists.newArrayList();
-		String table = getTable();
-		pl.add(table);
-		pl.add(table);
-		pl.add(parentId);
-		return Db.find(getSql("common.tree"), pl);
+		Kv param = Kv.by("table", getTable()).set("parentId", parentId);
+		return Db.find(getSqlPara("common.tree", param));
 	}
 }

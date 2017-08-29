@@ -50,7 +50,7 @@ public class UserKit {
 		Map<String, List<Record>> dictMap = (Map<String, List<Record>>) getCache(CACHE_DICT_MAP);
 		if (dictMap == null) {
 			dictMap = Maps.newHashMap();
-			List<Record> dictList = Db.find(Db.getSqlPara("", 1));
+			List<Record> dictList = Db.find(Db.getSql("dict.list"), 1);
 			setDictMap(dictMap, dictList);
 			setCache(CACHE_DICT_MAP, dictMap);
 		}
@@ -67,7 +67,7 @@ public class UserKit {
 	private static void setDictMap(Map<String, List<Record>> dictMap, List<Record> dictList) {
 		for (Record r : dictList) {
 			if (StringUtils.isNotEmpty(r.getStr("isParent"))) {
-				List<Record> subList = Db.find(Db.getSqlPara("", r.getLong(QueryKit.KEY_ID)));
+				List<Record> subList = Db.find(Db.getSql("dict.list"), r.getLong(QueryKit.KEY_ID));
 				dictMap.put(r.getStr(QueryKit.KEY_CODE), subList);
 				setDictMap(dictMap, subList);
 			}
