@@ -3,10 +3,12 @@ package me.dfun.common.kit;
 import java.sql.Timestamp;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import com.jfinal.kit.Kv;
 import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.activerecord.Model;
+import com.jfinal.plugin.activerecord.Page;
 import com.jfinal.plugin.activerecord.Record;
 
 import me.dfun.common.annotation.Table;
@@ -24,6 +26,23 @@ public class ModelExt<M extends ModelExt<?>> extends Model<M> {
 		// 获取注解对象
 		Table annotation = (Table) getClass().getAnnotation(Table.class);
 		return annotation.name();
+	}
+
+	/**
+	 * 分页查询
+	 */
+	public Response paginate(String sql, Map<String, Object> map) {
+		int page = QueryKit.getInt(map, "page", 1);
+		int limit = QueryKit.getInt(map, "limit", 30);
+		Page<M> p = paginate(page, limit, getSqlPara(sql, map));
+		Response r = new Response();
+		if (p.getList() != null && !p.getList().isEmpty()) {
+			r.setCount(p.getTotalRow());
+			r.setData(p.getList());
+		} else {
+			r.setMsg("无数据");
+		}
+		return r;
 	}
 
 	/**
