@@ -37,27 +37,4 @@
 <? } ?>
   </div>
   ${layoutContent}
-  <script type="text/javascript">
-	<? if (search!false) { ?>
-	$("#search-btn").click(function(){
-		$("#searchform").submit();
-	});
-	<? } ?>
-	function remove(id){
-		layer.open({
-			title: "提示 ",
-			icon: 3,
-			content: "确定要删除该数据吗？",
-			btn: ["确定","取消"],
-			btn1: function(index){
-				layer.close(index);
-				var url = '${ctx!}/${module!}/delete/'+id;
-				window.location = url;
-			},
-			btn2: function(index){
-				layer.close(index);
-			}
-		});
-	}
-  </script>
 <? } ?>

@@ -1,27 +1,21 @@
 <? layout("/layouts/list.html",{"module":"role","operate":"list","add":true,"search":true}){ ?>
-  <table class="layui-table table">
-    <thead>
-      <tr>
-        <th class="w50">${i18n("common.index")}</th>
-        <th class="w100">${i18n("role.attr.name")}</th>
-        <th class="">${i18n("role.attr.permission")}</th>
-        <th class="w50">${i18n("common.sort")}</th>
-      </tr>
-    </thead>
-    <tbody>
-    <? for(item in page.list!){ ?>
-      <tr>
-        <td>${(page.pageNumber-1)*page.pageSize+itemLP.index}</td>
-        <td><a href="${ctx!}/role/view/${item.id}" title="${i18n('operate.view')}">${item.name!}</a></td>
-        <td>${item.permission!}</td>
-        <td>${item.sort!}</td>
-      </tr>
-    <? }elsefor{ ?>
-      <tr>
-        <td colspan="5">${i18n("none")}</td>
-      </tr>
-    <? } ?>
-    </tbody>
-  </table>
-  <#pagination page="${page}"/>
+  <table id="role" class="layui-table"></table>
+  <script>
+	layui.use('table', function(){
+		var table = layui.table;
+		table.render({
+			elem: '#role',
+			url: '${ctx!}/role/page',
+			cols: [[
+				{checkbox: true, fixed: true},
+				{field:'id', title: '${i18n("common.index")}', width:70, sort: true, fixed: true},
+				{field:'name', title: '${i18n("role.attr.name")}', width:200},
+				{field:'permission', title: '${i18n("role.attr.permission")}', width:700},
+				{field:'sort', title: '${i18n("common.sort")}', width:70, sort: true}
+			]],
+			page: true,
+			height: 315
+		});
+	});
+  </script>
 <? } ?>
